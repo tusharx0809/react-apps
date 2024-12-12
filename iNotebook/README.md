@@ -1,0 +1,1 @@
+This project contains application of iNotbook where a user cam login, create account, add notes, edit notes and delete notes. At the backend, data is stored in MonogoDB database and passwords are stored in hashed format with added salt using bcrypt.
