@@ -19,21 +19,21 @@
 <h2>Use "npm run both" to start the app</h2>
 
 
-<h3>Images Below</h3>
+<h1>Images Below</h1>
 <h2>Login Page</h2>
-<img src="images/login.JPG" width="450" height="450">
+<img src="images/login.JPG" width="550" height="450">
 
 <h2>SignUP Page</h2>
-<img src="images/signup.JPG" width="450" height="450">
+<img src="images/signup.JPG" width="550" height="450">
 
-<h2>SignUP Page</h2>
-<img src="images/homepage.JPG" width="450" height="450">
+<h2>HomePage</h2>
+<img src="images/homepage.JPG" width="550" height="450">
 
 <h2>Settings</h2>
-<img src="images/settings.JPG" width="450" height="450">
+<img src="images/settings.JPG" width="550" height="450">
 
 <h2>Friends and Requests</h2>
-<img src="images/friends.JPG" width="450" height="450">
+<img src="images/friends.JPG" width="550" height="450">
 
 <h2>Edit Post</h2>
-<img src="images/editpost.JPG" width="450" height="450">
+<img src="images/editpost.JPG" width="550" height="450">
