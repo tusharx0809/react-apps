@@ -8,4 +8,4 @@
 
 <h2>Use npm run both to start the app</h2>
 
-![Login Page](images/login.JPG)
+<img src="images/login.JPG" width="500" height="500>
