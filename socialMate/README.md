@@ -7,7 +7,7 @@
     <li>Send Friend request, remove friends.</li>
     <li>Post, Like and comment on posts.</li>
     <li>Renew Password, delete account.</li>
-    <li>Dynamic Alerts when performing an event</li>
+    <li>Dynamic Alerts when performing an event like incorrect password, sending requests or accepting requests.</li>
 </ul>
 
 <h3>How to test?</h3>
