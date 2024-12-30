@@ -80,7 +80,7 @@ const Signup = () => {
             <div className="card-content">
               <div className="media">
                 <div className="media-content">
-                  <p className="title is-4 my-4">Login</p>
+                  <p className="title is-4 my-4">Sign Up</p>
                 </div>
               </div>
               <form onSubmit={createUser}>
