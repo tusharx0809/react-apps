@@ -33,5 +33,13 @@ const UserSchema = new Schema({
   otpExpire:{
     type: Date,
   }
-
 });
+
+UserSchema.methods.generateOTP = function() {
+    const otp = Math.floor(1000 + Math.random() * 9000).toString(); //generates 4 digit OTP
+    this.otp = otp;
+    this.otpExpire = Date.now() + 300000;
+    return otp;
+}
+
+module.exports = mongoose.model('User', UserSchema);
