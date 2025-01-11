@@ -1,3 +1,4 @@
+require('dotenv').config();
 const nodemailer = require('nodemailer');
 
 const sendEmail = async (options) => {
@@ -16,7 +17,7 @@ const sendEmail = async (options) => {
         html: options.message,
     };
 
-    await transporter.sendEmail(mailOptions);
+    await transporter.sendMail(mailOptions);
 };
 
 module.exports = sendEmail;
