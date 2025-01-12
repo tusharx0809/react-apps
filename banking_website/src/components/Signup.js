@@ -16,16 +16,24 @@ const Signup = () => {
   };
   const signUp = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.post(
-        "http://localhost:5050/api/auth/signup",
-        formData
-      );
-      if (response.success) {
-        localStorage.setItem("token", response.authToken);
-      }
-    } catch (error) {
-      console.error(error.message);
+    const response = await fetch('http://localhost:5050/api/auth/signup',{
+        method: "POST",
+        headers:{
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            password: formData.password,
+            dob: formData.dob,
+            phone: formData.phone,
+        })       
+    });
+    const json = await response.json();
+    if(json.success){
+        localStorage.setItem("token",json.authToken);
+    }else{
+        console.log(json.error);
     }
   };
   return (
