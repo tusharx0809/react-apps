@@ -158,6 +158,17 @@ router.post("/login",
     console.error(error.message);
     res.status(500).send("Internal server error")
   }
-})
+});
+
+router.get("/getuser", fetchuser, async(req, res)=>{
+  try {
+      const userID = req.user.id;
+      const user = await User.findById(userID).select("-password");
+      res.json(user);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal server error");
+  }
+});
 
 module.exports = router;
