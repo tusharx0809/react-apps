@@ -85,7 +85,7 @@ router.post(
         message: "User Registered Successfully. Please verify your email.",
       });
     } catch (error) {
-      console.error(error.message);
+      console.error(message);
       res.status(500).send("Internal Server error");
     }
   }

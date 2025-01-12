@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +11,7 @@ const Signup = () => {
     phone: "",
   });
 
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,9 +40,9 @@ const Signup = () => {
     const json = await response.json();
     if(json.success){
         localStorage.setItem("token",json.authToken);
-        console.log(json);
+        navigate("/verifyotp");
     }else{
-        console.log(json);
+      alert(json.errors[0].msg);
     }
   };
   return (
