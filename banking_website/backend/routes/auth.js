@@ -63,7 +63,6 @@ router.post(
         });
       } catch (emailError) {
         console.error("Email sending failed:", emailError);
-        // Optionally delete the user if email fails
         await User.findByIdAndDelete(user._id);
         return res.status(500).json({
           error: "Failed to send verification email",
