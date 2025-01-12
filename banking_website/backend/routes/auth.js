@@ -49,17 +49,27 @@ router.post(
       const otp = user.generateOTP();
 
       await user.save();
-      
+
       const message = `
             <h1> Welcome to Banking Website</h1>
             <p> Your OTP for email verification is: <b>${otp}</b></p>
             <p>OTP Valid for 5 minutes</p>`;
 
-      await sendEmail({
-        email: user.email,
-        subject: "Email verification OTP",
-        message,
-      });
+      try {
+        await sendEmail({
+          email: user.email,
+          subject: "Email verification OTP",
+          message,
+        });
+      } catch (emailError) {
+        console.error("Email sending failed:", emailError);
+        // Optionally delete the user if email fails
+        await User.findByIdAndDelete(user._id);
+        return res.status(500).json({
+          error: "Failed to send verification email",
+          details: emailError.message,
+        });
+      }
 
       const data = {
         user: {
@@ -69,14 +79,12 @@ router.post(
 
       const authToken = jwt.sign(data, JWT_SECRET);
       success = true;
-      
-      res
-        .status(201)
-        .json({
-          success,
-          authToken,
-          message: "User Registered Successfully. Please verify your email.",
-        });
+
+      res.status(201).json({
+        success,
+        authToken,
+        message: "User Registered Successfully. Please verify your email.",
+      });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Internal Server error");

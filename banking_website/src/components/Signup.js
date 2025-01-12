@@ -16,7 +16,7 @@ const Signup = () => {
 
   const signUp = async (e) => {
     e.preventDefault();
-    const response = await fetch('http://localhost:5050/api/auth/signup',{
+    const response = await fetch("http://localhost:5050/api/auth/signup/",{
         method: "POST",
         headers:{
             "Content-Type": "application/json",
@@ -44,7 +44,7 @@ const Signup = () => {
           type="text"
           id="name"
           name="name"
-          value={formData.name || " "}
+          value={formData.name}
           onChange={handleChange}
         />
         <label htmlFor="email">Email:</label>
@@ -52,7 +52,7 @@ const Signup = () => {
           type="email"
           id="email"
           name="email"
-          value={formData.email || " "}
+          value={formData.email}
           onChange={handleChange}
         />
         <label htmlFor="password">Password:</label>
@@ -60,7 +60,7 @@ const Signup = () => {
           type="password"
           id="password"
           name="password"
-          value={formData.password || ""}
+          value={formData.password}
           onChange={handleChange}
         />
         <label htmlFor="dob">DOB:</label>
@@ -68,7 +68,7 @@ const Signup = () => {
           type="text"
           id="dob"
           name="dob"
-          value={formData.dob || " "}
+          value={formData.dob}
           onChange={handleChange}
         />
         <label htmlFor="phone">Phone:</label>
@@ -76,7 +76,7 @@ const Signup = () => {
           type="text"
           id="phone"
           name="phone"
-          value={formData.phone || " "}
+          value={formData.phone}
           onChange={handleChange}
         />
         <button type="submit">Signup</button>
