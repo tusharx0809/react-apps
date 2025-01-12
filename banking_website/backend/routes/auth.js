@@ -93,6 +93,7 @@ router.post(
 
 router.post("/verify-otp", fetchuser, async (req, res) => {
   try {
+    let success = false;
     const userID = req.user.id;
     const user = await User.findById(userID).select("-password");
 
@@ -111,9 +112,9 @@ router.post("/verify-otp", fetchuser, async (req, res) => {
     user.otpExpire = undefined;
 
     await user.save();
-
+    success = true;
     res.status(200).json({
-      success: true,
+      success,
       message: "Email verified Successfully!",
     });
   } catch (error) {
