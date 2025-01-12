@@ -26,6 +26,7 @@ const ProfileState = (props) => {
       value={{
         getUserProfile,
         user,
+        setUser
       }}
     >
       {props.children}
