@@ -5,10 +5,11 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Verifyotp from "./components/Verifyotp";
+import ProfileState from "./context/Profile/ProfileState";
 
 function App() {
   return (
-    <div>
+    <ProfileState>
       <Router>
         <Navbar />
         <Routes>
@@ -18,7 +19,7 @@ function App() {
           <Route path="/verifyotp" element={<Verifyotp />} />
         </Routes>
       </Router>
-    </div>
+   </ProfileState>
   );
 }
 
