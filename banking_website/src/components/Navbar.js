@@ -5,9 +5,9 @@ const Navbar = () => {
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
         <div className="container-fluid">
-          <Link to="/"><a className="navbar-brand">
+          <Link className="navbar-brand text-decoration-none" to="/">
             Banking
-          </a></Link>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
