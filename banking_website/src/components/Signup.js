@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
+    cpassword:"",
     dob: "",
     phone: "",
   });
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -16,6 +19,10 @@ const Signup = () => {
 
   const signUp = async (e) => {
     e.preventDefault();
+    if(formData.password !== formData.cpassword){
+      alert("Please enter same passwords!");
+      return;
+    }
     const response = await fetch("http://localhost:5050/api/auth/signup/",{
         method: "POST",
         headers:{
@@ -38,50 +45,100 @@ const Signup = () => {
     }
   };
   return (
-    <div>
+    <div className="container">
       <form onSubmit={signUp}>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-        />
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-        <label htmlFor="dob">DOB:</label>
-        <input
-          type="text"
-          id="dob"
-          name="dob"
-          value={formData.dob}
-          onChange={handleChange}
-        />
-        <label htmlFor="phone">Phone:</label>
-        <input
-          type="text"
-          id="phone"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-        />
-        <button type="submit">Signup</button>
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">
+            Name
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="name"
+            name="name"
+            onChange={handleChange}
+            value={formData.name}
+            placeholder="Enter Full Name..."
+          />
+          
+        </div>
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">
+            Email
+          </label>
+          <input
+            type="email"
+            className="form-control"
+            id="email"
+            name="email"
+            onChange={handleChange}
+            value={formData.email}
+            placeholder="Enter your Email..."
+          />
+          
+        </div>
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">
+            Password
+          </label>
+          <input
+            type="password"
+            className="form-control"
+            id="password"
+            name="password"
+            onChange={handleChange}
+            value={formData.password}
+            placeholder="Enter Password (Atleast 8 characters)"
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">
+            Confirm Password
+          </label>
+          <input
+            type="password"
+            className="form-control"
+            id="cpassword"
+            name="cpassword"
+            onChange={handleChange}
+            value={formData.cpassword}
+            placeholder="Confirm password..."
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">
+            Date of Birth
+          </label>
+          <input
+            type="date"
+            className="form-control"
+            id="dob"
+            name="dob"
+            onChange={handleChange}
+            value={formData.dob}
+            placeholder="Enter date of birth..."
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">
+            Phone
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="phone"
+            name="phone"
+            onChange={handleChange}
+            value={formData.phone}
+            placeholder="Enter Phone Number..."
+          />
+        </div>
+        <button type="submit" className="btn btn-primary">
+          Sign up
+        </button>
+        
       </form>
+      
     </div>
   );
 };
