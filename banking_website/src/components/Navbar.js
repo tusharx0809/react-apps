@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import profileContext from "../context/Profile/ProfileContext";
 
 const Navbar = () => {
-  const { user, setUser } = useContext(profileContext); 
+  const { user, setUser } = useContext(profileContext);
   const navigate = useNavigate();
 
   const logout = () => {
@@ -14,7 +14,10 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+      <nav
+        className="navbar navbar-expand-lg bg-body-tertiary"
+        data-bs-theme="dark"
+      >
         <div className="container-fluid">
           <Link className="navbar-brand text-decoration-none" to="/">
             Banking
@@ -35,7 +38,11 @@ const Navbar = () => {
               {user && ( // Only display if user is not null
                 <>
                   <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page" to="/">
+                    <Link
+                      className="nav-link active"
+                      aria-current="page"
+                      to="/"
+                    >
                       Home
                     </Link>
                   </li>
@@ -45,6 +52,11 @@ const Navbar = () => {
             {user && ( // Only display if user is not null
               <button className="btn btn-danger" onClick={logout}>
                 Logout
+              </button>
+            )}
+            {!user && (
+              <button type="button" class="btn btn-outline-light">
+                Get Your email verified!
               </button>
             )}
           </div>
