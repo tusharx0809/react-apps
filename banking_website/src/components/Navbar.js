@@ -1,6 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Navbar = () => {
+    const navigate = useNavigate();
+    const logout = ()=>{
+        localStorage.removeItem("token");
+        navigate("/login");
+    }
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
@@ -20,21 +25,19 @@ const Navbar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0 mx-2">
               <li className="nav-item">
                 <a className="nav-link active" aria-current="page" href="#">
                   Home
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#">
-                  Link
-                </a>
-              </li>
+              
               
             </ul>
+            
+            <button className="btn btn-danger" onClick={logout}>Logout</button>
           </div>
-          <button className="btn btn-danger">Logout</button>
+          
         </div>
       </nav>
     </div>
