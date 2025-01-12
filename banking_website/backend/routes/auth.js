@@ -49,7 +49,7 @@ router.post(
       const otp = user.generateOTP();
 
       await user.save();
-
+      
       const message = `
             <h1> Welcome to Banking Website</h1>
             <p> Your OTP for email verification is: <b>${otp}</b></p>
@@ -69,7 +69,7 @@ router.post(
 
       const authToken = jwt.sign(data, JWT_SECRET);
       success = true;
-
+      
       res
         .status(201)
         .json({

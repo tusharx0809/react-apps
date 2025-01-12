@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -14,6 +13,7 @@ const Signup = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
   const signUp = async (e) => {
     e.preventDefault();
     const response = await fetch('http://localhost:5050/api/auth/signup',{
