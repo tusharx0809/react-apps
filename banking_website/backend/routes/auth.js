@@ -123,4 +123,41 @@ router.post("/verify-otp", fetchuser, async (req, res) => {
   }
 });
 
+router.post("/login", 
+  [
+    body("email","Enter Email").notEmpty(),
+    body("password","Password cannot be blank").exists()
+  ],
+  async(req, res)=>{
+  let success = false;
+  const errors = validationResult(req);
+  if(!errors.isEmpty()){
+    return res.status(400).json({errors: errors.array()});
+  }
+  const{ email, password } = req.body;
+  
+  try {
+    const user = await User.findOne({email});
+    if(!user){
+      return res.status(400).json({error: "Invalid Credentials"})
+    }
+    const passwordCompare = await bcrypt.compare(password, user.password);
+    if(!passwordCompare){
+      return res.status(400).json({error: "Invalid Credentials"});
+    }
+    
+    const payload = {
+      user:{
+        id: user.id
+      }
+    }
+    const authToken = jwt.sign(payload, JWT_SECRET);
+    success = true;
+    res.json({success, authToken, isVerified: user.isVerified });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal server error")
+  }
+})
+
 module.exports = router;
