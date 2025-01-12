@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div className="container-fluid">
           <Link className="navbar-brand text-decoration-none" to="/">
             Banking
@@ -34,6 +34,7 @@ const Navbar = () => {
               
             </ul>
           </div>
+          <button className="btn btn-danger">Logout</button>
         </div>
       </nav>
     </div>
