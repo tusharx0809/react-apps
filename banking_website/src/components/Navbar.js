@@ -55,7 +55,7 @@ const Navbar = () => {
               </button>
             ) : (
               <Link to="/verifyemail">
-              <button type="button" class="btn btn-outline-light">
+              <button type="button" className="btn btn-outline-light">
                 Get Your email verified!
               </button></Link>
             )}

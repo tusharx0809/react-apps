@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Verifyotp from "./components/Verifyotp";
 import ProfileState from "./context/Profile/ProfileState";
 import Verifyemail from "./components/Verifyemail";
+import Emailverification from "./components/Emailverification";
 
 function App() {
   return (
@@ -18,10 +19,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/verifyotp" element={<Verifyotp />} />
-          <Route path="/verifyemail" element ={<Verifyemail />} />
+          <Route path="/verifyemail" element={<Verifyemail />} />
+          <Route path="/emailverification" element={<Emailverification />} />
         </Routes>
       </Router>
-   </ProfileState>
+    </ProfileState>
   );
 }
 
