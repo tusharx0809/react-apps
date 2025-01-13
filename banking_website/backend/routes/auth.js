@@ -123,54 +123,98 @@ router.put("/verify-otp", fetchuser, async (req, res) => {
   }
 });
 
-router.post("/login", 
+router.post(
+  "/login",
   [
-    body("email","Enter Email").notEmpty(),
-    body("password","Password cannot be blank").exists()
+    body("email", "Enter Email").notEmpty(),
+    body("password", "Password cannot be blank").exists(),
   ],
-  async(req, res)=>{
-  let success = false;
-  const errors = validationResult(req);
-  if(!errors.isEmpty()){
-    return res.status(400).json({errors: errors.array()});
-  }
-  const{ email, password } = req.body;
-  
-  try {
-    const user = await User.findOne({email});
-    if(!user){
-      return res.status(400).json({error: "Invalid Credentials"})
+  async (req, res) => {
+    let success = false;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
-    const passwordCompare = await bcrypt.compare(password, user.password);
-    if(!passwordCompare){
-      return res.status(400).json({error: "Invalid Credentials"});
-    }
-    
-    const payload = {
-      user:{
-        id: user.id
-      }
-    }
-    const authToken = jwt.sign(payload, JWT_SECRET);
-    success = true;
-    res.json({success, authToken, isVerified: user.isVerified });
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send("Internal server error")
-  }
-});
+    const { email, password } = req.body;
 
-router.get("/getuser", fetchuser, async(req, res)=>{
+    try {
+      const user = await User.findOne({ email });
+      if (!user) {
+        return res.status(400).json({ error: "Invalid Credentials" });
+      }
+      const passwordCompare = await bcrypt.compare(password, user.password);
+      if (!passwordCompare) {
+        return res.status(400).json({ error: "Invalid Credentials" });
+      }
+
+      const payload = {
+        user: {
+          id: user.id,
+        },
+      };
+      const authToken = jwt.sign(payload, JWT_SECRET);
+      success = true;
+      res.json({ success, authToken, isVerified: user.isVerified });
+    } catch (error) {
+      console.error(error.message);
+      res.status(500).send("Internal server error");
+    }
+  }
+);
+
+router.get("/getuser", fetchuser, async (req, res) => {
   try {
-      const userID = req.user.id;
-      const user = await User.findById(userID).select("-password");
-      res.json(user);
+    const userID = req.user.id;
+    const user = await User.findById(userID).select("-password");
+    res.json(user);
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Internal server error");
   }
 });
 
-router.put()
+router.put("/verify-email", async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email }).select("-password");
+    if (!user) {
+      return res
+        .status(400)
+        .json({ error: "User does not exist, please SignUp!" });
+    }
+    if (user.isVerified) {
+      return res.status(400).json({ message: "User already verified!" });
+    }
+
+    const otp = user.generateOTP();
+
+    await user.save();
+
+    const message = `
+            <h1> Welcome to Banking Website</h1>
+            <p> Your OTP for email verification is: <b>${otp}</b></p>
+            <p>OTP Valid for 5 minutes</p>`;
+
+    try {
+      await sendEmail({
+        email: user.email,
+        subject: "Email verification OTP",
+        message,
+      });
+    } catch (emailError) {
+      console.error("Email sending failed:", emailError);
+      await User.findByIdAndDelete(user._id);
+      return res.status(500).json({
+        error: "Failed to send verification email",
+        details: emailError.message,
+      });
+    }
+
+    res.status(200).json({ message: "OTP sent, please check your email." });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal server error");
+  }
+});
 
 module.exports = router;
