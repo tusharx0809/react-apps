@@ -54,9 +54,10 @@ const Navbar = () => {
                 Logout
               </button>
             ) : (
+              <Link to="/verifyemail">
               <button type="button" class="btn btn-outline-light">
                 Get Your email verified!
-              </button>
+              </button></Link>
             )}
           </div>
         </div>
