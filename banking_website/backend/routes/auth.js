@@ -175,6 +175,7 @@ router.get("/getuser", fetchuser, async (req, res) => {
 
 router.put("/verify-email", async (req, res) => {
   try {
+    let success = false;
     const { email } = req.body;
     const user = await User.findOne({ email }).select("-password");
     if (!user) {
@@ -209,12 +210,45 @@ router.put("/verify-email", async (req, res) => {
         details: emailError.message,
       });
     }
-
-    res.status(200).json({ message: "OTP sent, please check your email." });
+    success = true;
+    res
+      .status(200)
+      .json({ success, message: "OTP sent, please check your email." });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Internal server error");
   }
 });
 
+router.put("/verifyEmail", async (req, res) => {
+  try {
+    let success = false;
+    const email = req.header("email");
+    const user = await User.findOne({ email }).select("-password");
+    const { otp } = req.body;
+
+    if (!user) {
+      return res.status(400).json({ error: "User Not found" });
+    }
+
+    if (user.otp !== otp || user.otpExpire < Date.now()) {
+      return res.status(400).json({ error: "Invalid or Expired OTP" });
+    }
+
+    user.isVerified = true;
+    user.otp = undefined;
+    user.otpExpire = undefined;
+
+    await user.save();
+    success = true;
+    res.status(201).json({
+      success,
+      message: "Your email is verified, you can now login using your email and password.",
+    });
+
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Internal server error");
+  }
+});
 module.exports = router;
