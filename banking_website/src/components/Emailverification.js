@@ -22,6 +22,7 @@ const Emailverification = () => {
         if(json.success){
             alert(json.message);
             navigate("/login");
+            localStorage.removeItem("email");
         }else{
             alert(json.error);
         }
