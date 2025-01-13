@@ -23,7 +23,7 @@ const Verifyemail = () => {
             alert(json.message);
             navigate("/emailverification")
         }else{
-            alert("Something went wrong, please try again!");
+            alert(json.error);
         }
     }
   return (

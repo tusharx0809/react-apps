@@ -184,7 +184,7 @@ router.put("/verify-email", async (req, res) => {
         .json({ error: "User does not exist, please SignUp!" });
     }
     if (user.isVerified) {
-      return res.status(400).json({ message: "User already verified!" });
+      return res.status(400).json({ error: "User already verified!" });
     }
 
     const otp = user.generateOTP();
@@ -230,7 +230,7 @@ router.put("/verifyEmail", async (req, res) => {
     if (!user) {
       return res.status(400).json({ error: "User Not found" });
     }
-
+    
     if (user.otp !== otp || user.otpExpire < Date.now()) {
       return res.status(400).json({ error: "Invalid or Expired OTP" });
     }
