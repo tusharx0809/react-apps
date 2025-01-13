@@ -91,7 +91,7 @@ router.post(
   }
 );
 
-router.post("/verify-otp", fetchuser, async (req, res) => {
+router.put("/verify-otp", fetchuser, async (req, res) => {
   try {
     let success = false;
     const userID = req.user.id;
@@ -170,5 +170,7 @@ router.get("/getuser", fetchuser, async(req, res)=>{
     res.status(500).send("Internal server error");
   }
 });
+
+router.put()
 
 module.exports = router;

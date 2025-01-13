@@ -12,7 +12,7 @@ const Verifyotp = () => {
     const verifyOtp = async (e) => {
         e.preventDefault();
         const response = await fetch("http://localhost:5050/api/auth/verify-otp/",{
-            method:"POST",
+            method:"PUT",
             headers:{
                 "Content-Type": "application/json",
                 "authToken":localStorage.getItem("token"),              
