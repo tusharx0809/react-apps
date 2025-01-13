@@ -56,7 +56,7 @@ const Login = () => {
               left: "50%",
               transform: "translateX(-50%)",
               zIndex: 10,
-              width: "500px",
+              width: "600px",
               padding: "10px",
               textAlign: "center",
               // borderRadius: "20px",
