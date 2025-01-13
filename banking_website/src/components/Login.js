@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import profileContext from "../context/Profile/ProfileContext";
 
 const Login = () => {
+  const { alert, showAlert } = useContext(profileContext);
   const [credentials, setCredentials] = useState({
     email:"",
     password:""
@@ -29,14 +30,41 @@ const Login = () => {
         localStorage.setItem("token",json.authToken);
         navigate("/");
     }else if(json.success && !json.isVerified){
-        alert("Your email is not verified yet, please verify your email first!");
+        showAlert("Your email is not verified yet, please verify your email first!","danger");
     }else{
-        alert("Login failed, please check credentials");
+        showAlert("Login failed, please check credentials","danger");
     }
     
   }
   return (
     <div className="container d-flex align-items-center justify-content-center" style={{ minHeight: "90vh" }}>
+      <div>
+        {/* Display alert if exists */}
+        {alert && alert.message && alert.type && (
+          <div
+            className={`box ${
+              alert.type === "success"
+                ? "has-background-primary-light has-text-black-bis"
+                : alert.type === "danger"
+                ? "has-background-danger-light has-text-black-bis"
+                : ""
+            }`}
+            style={{
+              position: "fixed",
+              top: "70px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              zIndex: 10,
+              width: "500px",
+              padding: "10px",
+              textAlign: "center",
+              borderRadius: "20px",
+            }}
+          >
+            {alert.message}
+          </div>
+        )}
+      </div>
         <div className="card p-4" style={{ width: "100%", maxWidth: "400px" }}>
       <form onSubmit={login}> 
       <h2 className="text-center mb-4">Login</h2>

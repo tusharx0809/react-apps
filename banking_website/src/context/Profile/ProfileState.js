@@ -5,6 +5,11 @@ const ProfileState = (props) => {
   const host = "http://localhost:5050";
 
   const [user, setUser] = useState(null);
+  const [alert, setAlert] = useState();
+  const showAlert = (message, type) => {
+    setAlert({message, type});
+    setTimeout(()=>setAlert(null),3000);
+  }
 
   const getUserProfile = async () => {
     const response = await fetch(`${host}/api/auth/getuser`, {
@@ -32,7 +37,9 @@ const ProfileState = (props) => {
         getUserProfile,
         user,
         setUser,
-        logoutUser
+        logoutUser,
+        alert,
+        showAlert
       }}
     >
       {props.children}

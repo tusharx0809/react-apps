@@ -18,7 +18,7 @@ const Home = () => {
   
 
   return (
-    <div>
+    <div className="container-sm">
       <h1>{user?.name}</h1>
     </div>
   )
