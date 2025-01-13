@@ -29,6 +29,7 @@ const Login = () => {
     if(json.success && json.isVerified){
         localStorage.setItem("token",json.authToken);
         navigate("/");
+        showAlert("Logged in successfully","success")
     }else if(json.success && !json.isVerified){
         showAlert("Your email is not verified yet, please verify your email first!","danger");
     }else{
@@ -42,11 +43,11 @@ const Login = () => {
         {/* Display alert if exists */}
         {alert && alert.message && alert.type && (
           <div
-            className={`box ${
+            className={`alert ${
               alert.type === "success"
-                ? "has-background-primary-light has-text-black-bis"
+                ? "alert-primary"
                 : alert.type === "danger"
-                ? "has-background-danger-light has-text-black-bis"
+                ? "alert-danger"
                 : ""
             }`}
             style={{
@@ -58,7 +59,7 @@ const Login = () => {
               width: "500px",
               padding: "10px",
               textAlign: "center",
-              borderRadius: "20px",
+              // borderRadius: "20px",
             }}
           >
             {alert.message}
