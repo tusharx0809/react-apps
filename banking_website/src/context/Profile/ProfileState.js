@@ -21,12 +21,18 @@ const ProfileState = (props) => {
     }
   };
 
+  const logoutUser = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+  };
+
   return (
     <ProfileContext.Provider
       value={{
         getUserProfile,
         user,
-        setUser
+        setUser,
+        logoutUser
       }}
     >
       {props.children}
