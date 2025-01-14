@@ -8,6 +8,7 @@ import Verifyotp from "./components/Verifyotp";
 import ProfileState from "./context/Profile/ProfileState";
 import Verifyemail from "./components/Verifyemail";
 import Emailverification from "./components/Emailverification";
+import Settings from "./components/Settings";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/verifyotp" element={<Verifyotp />} />
           <Route path="/verifyemail" element={<Verifyemail />} />
           <Route path="/emailverification" element={<Emailverification />} />
+          <Route path="/settings" element={<Settings />} />
         </Routes>
       </Router>
     </ProfileState>
