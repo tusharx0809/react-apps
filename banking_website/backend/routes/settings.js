@@ -18,7 +18,7 @@ router.put("/renewpassword", fetchuser, async (req, res) => {
       return res.status(404).json({ success, error: "User not found" });
     }
 
-    const curPassword = req.body.curPassword;
+    const curPassword = req.body.curpassword;
 
     const passwordCompare = await bcrypt.compare(curPassword, user.password);
     if (!passwordCompare) {
