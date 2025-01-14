@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
+import profileContext from "../context/Profile/ProfileContext";
+
 const Verifyemail = () => {
     const [email, setEmail ] = useState("");
     const handleChange = (e) => {
         setEmail(e.target.value);
     }
+    const { alert, showAlert } = useContext(profileContext);
     const navigate = useNavigate();
     const verifyEmail = async (e) => {
         e.preventDefault();
@@ -20,10 +23,10 @@ const Verifyemail = () => {
         const json = await response.json();
         if(json.success){
             localStorage.setItem("email",email);
-            alert(json.message);
+            showAlert(json.message,"success");
             navigate("/emailverification")
         }else{
-            alert(json.error);
+            showAlert(json.error,"danger");
         }
     }
   return (
@@ -32,6 +35,33 @@ const Verifyemail = () => {
       className="container d-flex align-items-center justify-content-center"
       style={{ minHeight: "90vh" }}
     >
+      <div>
+        {/* Display alert if exists */}
+        {alert && alert.message && alert.type && (
+          <div
+            className={`alert ${
+              alert.type === "success"
+                ? "alert-primary"
+                : alert.type === "danger"
+                ? "alert-danger"
+                : ""
+            }`}
+            style={{
+              position: "fixed",
+              top: "70px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              zIndex: 10,
+              width: "600px",
+              padding: "10px",
+              textAlign: "center",
+              // borderRadius: "20px",
+            }}
+          >
+            {alert.message}
+          </div>
+        )}
+      </div>
       <div className="card p-4" style={{ width: "100%", maxWidth: "400px" }}>
         <form onSubmit={verifyEmail}>
           <h2 className="text-center mb-4">Verify Email</h2>
