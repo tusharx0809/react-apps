@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
+import profileContext from "../context/Profile/ProfileContext";
+
 const Emailverification = () => {
     const [otp, setOtp] = useState("");
     const handleChange = (e) =>{
         setOtp(e.target.value);
     }
+    const { alert, showAlert } = useContext(profileContext);
     const navigate = useNavigate();
     const verifyOTP = async (e) =>{
         e.preventDefault();
@@ -19,12 +22,12 @@ const Emailverification = () => {
             }),
         });
         const json = await response.json();
-        if(json.success){
-            alert(json.message);
+        if(json.success){  
             navigate("/login");
             localStorage.removeItem("email");
+            showAlert(json.message,"success");
         }else{
-            alert(json.error);
+            showAlert(json.error,"danger");
         }
     }
     
@@ -35,6 +38,33 @@ const Emailverification = () => {
       className="container d-flex align-items-center justify-content-center"
       style={{ minHeight: "90vh" }}
     >
+      <div>
+        {/* Display alert if exists */}
+        {alert && alert.message && alert.type && (
+          <div
+            className={`alert ${
+              alert.type === "success"
+                ? "alert-primary"
+                : alert.type === "danger"
+                ? "alert-danger"
+                : ""
+            }`}
+            style={{
+              position: "fixed",
+              top: "70px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              zIndex: 10,
+              width: "600px",
+              padding: "10px",
+              textAlign: "center",
+              // borderRadius: "20px",
+            }}
+          >
+            {alert.message}
+          </div>
+        )}
+      </div>
       <div className="card p-4" style={{ width: "100%", maxWidth: "400px" }}>
         <form onSubmit={verifyOTP}>
           <h2 className="text-center mb-4">Verify OTP</h2>
