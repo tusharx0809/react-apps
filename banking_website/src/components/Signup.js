@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import profileContext from "../context/Profile/ProfileContext";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +11,7 @@ const Signup = () => {
     dob: "",
     phone: "",
   });
-
+  const { alert, showAlert } = useContext(profileContext);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -21,7 +22,7 @@ const Signup = () => {
   const signUp = async (e) => {
     e.preventDefault();
     if (formData.password !== formData.cpassword) {
-      alert("Please enter the same passwords!");
+      showAlert("Please enter the same passwords!","danger");
       return;
     }
     const response = await fetch("http://localhost:5050/api/auth/signup/", {
@@ -41,13 +42,46 @@ const Signup = () => {
     if (json.success) {
       localStorage.setItem("token", json.authToken);
       navigate("/verifyotp");
-    } else {
-      alert(json.errors[0].msg);
+      showAlert("User Registerd, an OTP has been sent for verification","success")
+    } else if(!json.success){
+      showAlert(json.error, "danger");
+    }else if(json.errors && json.errors.length > 0){
+      showAlert(json.errors[0].msg, "danger");
+      console.log(json.errors[0].msg);
+    }else{
+      showAlert("An unexpected error occured, please try again!","danger");
     }
   };
 
   return (
     <div className="container d-flex align-items-center justify-content-center" style={{ minHeight: "90vh" }}>
+      <div>
+        {/* Display alert if exists */}
+        {alert && alert.message && alert.type && (
+          <div
+            className={`alert ${
+              alert.type === "success"
+                ? "alert-primary"
+                : alert.type === "danger"
+                ? "alert-danger"
+                : ""
+            }`}
+            style={{
+              position: "fixed",
+              top: "70px",
+              left: "50%",
+              transform: "translateX(-50%)",
+              zIndex: 10,
+              width: "600px",
+              padding: "10px",
+              textAlign: "center",
+              // borderRadius: "20px",
+            }}
+          >
+            {alert.message}
+          </div>
+        )}
+      </div>
       <div className="card p-4" style={{ width: "100%", maxWidth: "400px" }}>
         <form onSubmit={signUp}>
           <h2 className="text-center mb-4">Sign Up</h2>
