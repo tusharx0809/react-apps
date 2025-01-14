@@ -13,7 +13,7 @@ router.put("/renewpassword", fetchuser, async (req, res) => {
   try {
     let success = false;
     const userID = req.user.id;
-    
+
     const user = await User.findById(userID).select("+password");
     if (!user) {
       return res.status(404).json({ success, error: "User not found" });
@@ -45,6 +45,26 @@ router.put("/renewpassword", fetchuser, async (req, res) => {
       success,
       message: "Password has been successfully renewed.",
     });
+
+    const message = `
+            <h1> Password Renewal</h1>
+            <p> Your password was renewed at <b>${new Date().toDateString()} ${new Date().toLocaleTimeString()}</b>.</p>
+            `;
+
+    try {
+      await sendEmail({
+        email: user.email,
+        subject: "Password Renewed",
+        message,
+      });
+    } catch (emailError) {
+      console.error("Email sending failed:", emailError);
+      await User.findByIdAndDelete(user._id);
+      return res.status(500).json({
+        error: "Failed to send verification email",
+        details: emailError.message,
+      });
+    }
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Internal server error");
