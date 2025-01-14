@@ -43,13 +43,8 @@ const Signup = () => {
       localStorage.setItem("token", json.authToken);
       navigate("/verifyotp");
       showAlert("User Registerd, an OTP has been sent for verification","success")
-    } else if(!json.success){
-      showAlert(json.error, "danger");
-    }else if(json.errors && json.errors.length > 0){
-      showAlert(json.errors[0].msg, "danger");
-      console.log(json.errors[0].msg);
-    }else{
-      showAlert("An unexpected error occured, please try again!","danger");
+    } else{
+      showAlert(json.error,"danger");
     }
   };
 
