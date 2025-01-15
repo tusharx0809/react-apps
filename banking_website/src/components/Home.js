@@ -2,15 +2,17 @@ import React, { useContext, useEffect } from "react";
 import profileContext from "../context/Profile/ProfileContext";
 import { useNavigate } from "react-router-dom";
 const Home = () => {
-  const { getUserProfile, user, alert } = useContext(profileContext);
+  const { getUserProfile, user, alert, accInfo } = useContext(profileContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/login");
     }
-    getUserProfile();
-    //eslint-disable-next-line
+      getUserProfile();
+      
+      //eslint-disable-next-line
+    
   }, [getUserProfile]);
 
   return (
@@ -83,7 +85,7 @@ const Home = () => {
                         className="accordion-collapse collapse"
                         data-bs-parent="#accordionFlushExample"
                       >
-                        <div className="accordion-body">Rs 0</div>
+                        <div className="accordion-body">Rs: 0</div>
                       </div>
                     </div>
                     <div className="accordion-item">

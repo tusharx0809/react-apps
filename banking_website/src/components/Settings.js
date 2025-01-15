@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import profileContext from '../context/Profile/ProfileContext'
 
 const Settings = () => {
-  const { user, alert, showAlert } = useContext(profileContext);
+  const { alert, showAlert } = useContext(profileContext);
   const [passwords, setPasswords] = useState({
     curpassword:"",
     password:"",

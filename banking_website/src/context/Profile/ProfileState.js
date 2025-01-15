@@ -26,6 +26,29 @@ const ProfileState = (props) => {
     }
   };
 
+  const [accInfo, setAccInfo] = useState({
+    cam:0, //chequings amount
+    sam:0, //savings amount
+  });
+
+  const getAccInfo = async () => {
+    const response = await fetch(`${host}/api/accounts/getAccInfo`,{
+      method: "GET",
+      headers: {
+        authToken: localStorage.getItem("token"),
+      },
+    });
+    const json = await response.json();
+    if(json.success){
+      setAccInfo({
+        cam: json?.cheqAcc.amount,
+        sam: json?.savAcc.amount
+      });
+    }else{
+      showAlert("Something went wrong", "danger");
+    }
+  }
+
   const logoutUser = () => {
     localStorage.removeItem("token");
     setUser(null);
@@ -39,7 +62,9 @@ const ProfileState = (props) => {
         setUser,
         logoutUser,
         alert,
-        showAlert
+        showAlert,
+        accInfo,
+        getAccInfo
       }}
     >
       {props.children}
