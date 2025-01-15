@@ -42,8 +42,8 @@ const Home = () => {
           </div>
         )}
       </div>
-      <div style={{ marginTop: "70px" }}>
-        <div className="card" style={{width: "18rem"}}>
+      <div className="col-sm-12 col-md-6 col-lg-4 mb-4" style={{ marginTop: "70px" }}>
+        <div className="card mb-4">
           <div className="card-body">
             <h5 className="card-title">{user?.name}</h5>
             <h6 className="card-subtitle mb-2 text-muted">{user?.email}</h6>
@@ -56,6 +56,21 @@ const Home = () => {
             
           </div>
         </div>
+
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title">{user?.name}</h5>
+            <h6 className="card-subtitle mb-2 text-muted">{user?.email}</h6>
+            <p className="card-text">
+              Welcome to your account!
+            </p>
+            <a href="#" className="card-link">
+              Report an Issue
+            </a>
+            
+          </div>
+        </div>
+
         
       </div>
     </div>
