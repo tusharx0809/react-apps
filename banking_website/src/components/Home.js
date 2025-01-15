@@ -42,36 +42,78 @@ const Home = () => {
           </div>
         )}
       </div>
-      <div className="col-sm-12 col-md-6 col-lg-4 mb-4" style={{ marginTop: "70px" }}>
+      <div
+        className="col-sm-12 col-md-6 col-lg-4 mb-4"
+        style={{ marginTop: "70px" }}
+      >
         <div className="card mb-4">
           <div className="card-body">
             <h5 className="card-title">{user?.name}</h5>
             <h6 className="card-subtitle mb-2 text-muted">{user?.email}</h6>
-            <p className="card-text">
-              Welcome to your account!
-            </p>
+            <p className="card-text">Welcome to your account!</p>
             <a href="#" className="card-link">
               Report an Issue
             </a>
-            
           </div>
         </div>
-
-        <div className="card">
-          <div className="card-body">
-            <h5 className="card-title">{user?.name}</h5>
-            <h6 className="card-subtitle mb-2 text-muted">{user?.email}</h6>
-            <p className="card-text">
-              Welcome to your account!
-            </p>
-            <a href="#" className="card-link">
-              Report an Issue
-            </a>
-            
+        <div>
+          <div className="card">
+            <div className="card-body">
+              <div className="row justify-content-around">
+                <div className="col-4">
+                  <div
+                    className="accordion accordion-flush"
+                    id="accordionFlushExample"
+                  >
+                    <div className="accordion-item">
+                      <h2 className="accordion-header">
+                        <button
+                          className="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#flush-collapseOne"
+                          aria-expanded="false"
+                          aria-controls="flush-collapseOne"
+                        >
+                          Chequings
+                        </button>
+                      </h2>
+                      <div
+                        id="flush-collapseOne"
+                        className="accordion-collapse collapse"
+                        data-bs-parent="#accordionFlushExample"
+                      >
+                        <div className="accordion-body">Rs 0</div>
+                      </div>
+                    </div>
+                    <div className="accordion-item">
+                      <h2 className="accordion-header">
+                        <button
+                          className="accordion-button collapsed"
+                          type="button"
+                          data-bs-toggle="collapse"
+                          data-bs-target="#flush-collapseTwo"
+                          aria-expanded="false"
+                          aria-controls="flush-collapseTwo"
+                        >
+                          Savings
+                        </button>
+                      </h2>
+                      <div
+                        id="flush-collapseTwo"
+                        className="accordion-collapse collapse"
+                        data-bs-parent="#accordionFlushExample"
+                      >
+                        <div className="accordion-body">Rs 0</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-4"></div>
+              </div>
+            </div>
           </div>
         </div>
-
-        
       </div>
     </div>
   );
