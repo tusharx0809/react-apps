@@ -1,40 +1,21 @@
 const express = require("express");
-const ChequingsAcc = require("../models/ChequingsAccount");
-const SavingAcc = require("../models/SavingsAccount")
+const CheqAcc = require("../models/ChequingsAccount");
+const SavAcc = require("../models/SavingsAccount");
 const router = express.Router();
-const sendEmail = require("../utils/sendEmail");
 const fetchuser = require("../middleware/fetchuser");
 
-router.post("/createCheqAccount", fetchuser, async (req, res) => {
+router.get("/getAccInfo", fetchuser, async (req, res) => {
   try {
     const userID = req.user.id;
-    const account = new ChequingsAcc({
-      amount: 0,
-      user: userID
-    });
-    await account.save();
-    res.status(200).json({ message: "Chequing account created" });
+
+    const cheqAcc = await CheqAcc.findOne({ user: userID });
+    const savAcc = await SavAcc.findOne({ user: userID });
+    
+    res.status(200).json({ cheqAcc, savAcc });
   } catch (error) {
-    console.error(error.message);
-    res.status(500).send("Internal Server Error");
+    console.error(message);
+    res.status(500).send("Internal Server error");
   }
 });
-
-router.post("/createSavAccount", fetchuser, async (req, res) => {
-  try {
-    const userID = req.user.id;
-    const account = new SavingAcc({
-      amount: 0,
-      user: userID
-    });
-    await account.save();
-    res.status(200).json({ message: "Savings account created" });
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send("Internal Server Error");
-  }
-});
-
-
 
 module.exports = router;
