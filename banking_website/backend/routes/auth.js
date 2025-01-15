@@ -1,6 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const User = require("../models/User");
+const CheqAcc = require("../models/ChequingsAccount");
+const SavAcc = require("../models/SavingsAccount");
 const router = express.Router();
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
@@ -52,9 +54,19 @@ router.post(
 
       await user.save();
 
+      const cheqAcc = new CheqAcc({
+        user: user.id
+      })
+      const savAcc = new SavAcc({
+        user: user.id
+      })
+
+      await cheqAcc.save();
+      await savAcc.save();
+
       const message = `
             <h1> Welcome to Banking Website</h1>
-            <p> Your OTP for email verification is: <b>${otp}</b></p>
+            <p> Your Chequings and Savings Account have been created. To access, you need to verify your email. Your OTP for email verification is: <b>${otp}</b></p>
             <p>OTP Valid for 5 minutes</p>`;
 
       try {
