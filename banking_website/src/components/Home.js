@@ -75,7 +75,7 @@ const Home = () => {
                           aria-expanded="false"
                           aria-controls="flush-collapseOne"
                         >
-                          Chequings
+                          <h5>Chequings</h5>
                         </button>
                       </h2>
                       <div
@@ -96,7 +96,7 @@ const Home = () => {
                           aria-expanded="false"
                           aria-controls="flush-collapseTwo"
                         >
-                          Savings
+                          <h5>Savings</h5>
                         </button>
                       </h2>
                       <div
