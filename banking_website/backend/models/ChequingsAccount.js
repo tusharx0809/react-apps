@@ -13,4 +13,4 @@ const ChequingSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model('Chequings', chequingSchema)
+module.exports = mongoose.model('Chequings', ChequingSchema);
