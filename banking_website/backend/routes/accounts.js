@@ -20,15 +20,15 @@ router.post("/createCheqAccount", fetchuser, async (req, res) => {
   }
 });
 
-router.post("/createCheqAccount", fetchuser, async (req, res) => {
+router.post("/createSavAccount", fetchuser, async (req, res) => {
   try {
     const userID = req.user.id;
-    const account = new ChequingsAcc({
+    const account = new SavingAcc({
       amount: 0,
       user: userID
     });
     await account.save();
-    res.status(200).json({ message: "Chequing account created" });
+    res.status(200).json({ message: "Savings account created" });
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Internal Server Error");
