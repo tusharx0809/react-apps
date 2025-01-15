@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/settings', require('./routes/settings'));
-
+app.use('/api/accounts', require('./routes/accounts'))
 app.listen(port, ()=>{
     console.log(`Banking Mongo backend is running on http://localhost:${port}`);
 })
