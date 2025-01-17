@@ -3,7 +3,7 @@ import profileContext from "../context/Profile/ProfileContext";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const { getUserProfile, user, alert, accInfo, getAccInfo } =
+  const { getUserProfile, user, alert, showAlert, accInfo, getAccInfo } =
     useContext(profileContext);
   const navigate = useNavigate();
 
@@ -17,7 +17,67 @@ const Home = () => {
   }, []);
 
   const [IsTransferModal, setIsTransferModalOpen] = useState(false);
+  const [accounts, setAccounts] = useState({
+    from: "",
+    to: "",
+    amount: "",
+  });
 
+  const handleChange = (e) => {
+    setAccounts({
+      ...accounts,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const transferFunds = async () =>{
+
+    const amount = parseFloat(accounts.amount);
+    
+    if(accounts.from === accounts.to){
+      showAlert("Cannot transfer to same account! Try Again!","danger");
+      setIsTransferModalOpen(false);
+      return;
+    }
+    if(accounts.from === "Checquings"){
+      const response = await fetch('http://localhost:5050/api/accounts/cheqToSav',{
+        method:'PUT',
+        headers:{
+          "Content-Type": "application/json",
+          "authToken": localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          amount: amount
+        }),
+      });
+      const json = await response.json();
+      if(json.success){
+        setIsTransferModalOpen(false);
+        getAccInfo();
+        showAlert(json.message,"success"); 
+      }else{
+        showAlert(json.error,"danger");
+      }
+    }else{
+      const response = await fetch('http://localhost:5050/api/accounts/savToCheq',{
+        method:'PUT',
+        headers:{
+          "Content-Type": "application/json",
+          "authToken": localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          amount: amount
+        }),
+      });
+      const json = await response.json();
+      if(json.success){
+        setIsTransferModalOpen(false);
+        getAccInfo();
+        showAlert(json.message,"success"); 
+      }else{
+        showAlert(json.error,"danger");
+      }
+    }
+  }
   return (
     <div className="container-sm">
       <div>
@@ -165,23 +225,36 @@ const Home = () => {
                     <select
                       className="form-select mx-3"
                       aria-label="Default select example"
+                      name="from"
+                      value={accounts.from}
+                      onChange={handleChange}
                     >
-                      
-                      <option value="1">Chequings</option>
-                      <option value="2">Savings</option>
+                      <option>Checquings</option>
+                      <option>Savings</option>
                     </select>
                     <p className="fs-4 text fw-light my-2">To</p>
                     <select
                       className="form-select mx-3"
                       aria-label="Default select example"
+                      name="to"
+                      value={accounts.to}
+                      onChange={handleChange}
                     >
-                     
-                      <option value="1">Chequings</option>
-                      <option value="2">Savings</option>
+                      <option>Checquings</option>
+                      <option>Savings</option>
                     </select>
-                    
                   </div>
-                  <input className="form-control my-3" type="text" placeholder="Enter Amount" aria-label="default input example"/>
+                  <input
+                    className="form-control my-3"
+                    type="text"
+                    min="0"
+                    step="0.01"
+                    name="amount"
+                    value={accounts.amount}
+                    onChange={handleChange}
+                    placeholder="Enter Amount..."
+                    aria-label="default input example"
+                  />
                 </div>
                 <div className="modal-footer">
                   <button
@@ -191,7 +264,7 @@ const Home = () => {
                   >
                     Close
                   </button>
-                  <button type="button" className="btn btn-primary">
+                  <button type="button" className="btn btn-primary" onClick={transferFunds}>
                     Transfer
                   </button>
                 </div>
