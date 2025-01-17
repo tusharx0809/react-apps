@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import profileContext from "../context/Profile/ProfileContext";
 import { useNavigate } from "react-router-dom";
+
 const Home = () => {
   const { getUserProfile, user, alert, accInfo, getAccInfo } = useContext(profileContext);
   const navigate = useNavigate();
@@ -15,6 +16,8 @@ const Home = () => {
   }, []);
 
   return (
+    <>
+   
     <div className="container-sm">
       <div>
         {/* Display alert if exists */}
@@ -120,7 +123,7 @@ const Home = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div></>
   );
 };
 
