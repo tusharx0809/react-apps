@@ -9,9 +9,10 @@ router.put("/transferFunds", fetchuser, async (req, res) => {
   try {
     let success = false;
     const { amount, receiverMail } = req.body;
-    const userID = req.user.id;
+    const senderID = req.user.id;
 
-    const senderAcc = await CheqAcc.findOne({ user: userID });
+    const senderAcc = await CheqAcc.findOne({ user: senderID });
+   
     if (!senderAcc) {
       return res.status(400).json({ success, error: "Account not found!" });
     }
@@ -29,14 +30,14 @@ router.put("/transferFunds", fetchuser, async (req, res) => {
         .status(400)
         .json({ success, error: "Please enter amount greater than zero!" });
     }
-    if (amount < senderAcc.amount) {
+    if (amount > senderAcc.amount) {
       return res
         .status(400)
         .json({ success, error: "Insufficient funds in Checquings Account!" });
     }
 
     senderAcc.amount -= amount;
-    receiver += amount;
+    receiverAcc.amount += amount;
 
     await senderAcc.save();
     await receiverAcc.save();
