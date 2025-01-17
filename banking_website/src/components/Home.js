@@ -110,8 +110,10 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-4">
-                
+                <div className="col-6">
+                <div className="d-flex align-items-center justify-content-center">
+                  <div className="p-5"><button className="btn btn-primary btn-lg">Transfer</button></div>
+                </div>
                 </div>
               </div>
             </div>
