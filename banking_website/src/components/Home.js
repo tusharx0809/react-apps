@@ -61,7 +61,7 @@ const Home = () => {
           <div className="card">
             <div className="card-body">
               <div className="row justify-content-around">
-                <div className="col-4">
+                <div className="col-6">
                   <div
                     className="accordion accordion-flush"
                     id="accordionFlushExample"
@@ -110,7 +110,9 @@ const Home = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-4"></div>
+                <div className="col-4">
+                
+                </div>
               </div>
             </div>
           </div>
