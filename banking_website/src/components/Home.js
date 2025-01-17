@@ -84,7 +84,7 @@ const Home = () => {
                         className="accordion-collapse collapse"
                         data-bs-parent="#accordionFlushExample"
                       >
-                        <div className="accordion-body">Rs: {accInfo?.cheqAcc?.amount}</div>
+                        <div className="accordion-body"><i class="fa-solid fa-indian-rupee-sign fa-sm"/> {accInfo?.cheqAcc?.amount}</div>
                       </div>
                     </div>
                     <div className="accordion-item">
@@ -105,14 +105,14 @@ const Home = () => {
                         className="accordion-collapse collapse"
                         data-bs-parent="#accordionFlushExample"
                       >
-                        <div className="accordion-body">Rs: {accInfo?.savAcc?.amount} </div>
+                        <div className="accordion-body"><i class="fa-solid fa-indian-rupee-sign fa-sm"/> {accInfo?.savAcc?.amount} </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="col-6">
                 <div className="d-flex align-items-center justify-content-center">
-                  <div className="p-5"><button className="btn btn-primary btn-lg">Transfer</button></div>
+                  <div className="p-5"><button className="btn btn-primary btn-lg">Transfer&#8594;</button></div>
                 </div>
                 </div>
               </div>
