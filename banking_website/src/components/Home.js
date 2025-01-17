@@ -29,55 +29,60 @@ const Home = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const transferFunds = async () =>{
-
+  const transferFunds = async () => {
     const amount = parseFloat(accounts.amount);
-    
-    if(accounts.from === accounts.to){
-      showAlert("Cannot transfer to same account! Try Again!","danger");
+
+    if (accounts.from === accounts.to) {
+      showAlert("Cannot transfer to same account! Try Again!", "danger");
       setIsTransferModalOpen(false);
       return;
     }
-    if(accounts.from === "Checquings"){
-      const response = await fetch('http://localhost:5050/api/accounts/cheqToSav',{
-        method:'PUT',
-        headers:{
-          "Content-Type": "application/json",
-          "authToken": localStorage.getItem("token"),
-        },
-        body: JSON.stringify({
-          amount: amount
-        }),
-      });
+    if (accounts.from === "Checquings") {
+      const response = await fetch(
+        "http://localhost:5050/api/accounts/cheqToSav",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            authToken: localStorage.getItem("token"),
+          },
+          body: JSON.stringify({
+            amount: amount,
+          }),
+        }
+      );
       const json = await response.json();
-      if(json.success){
+      if (json.success) {
         setIsTransferModalOpen(false);
         getAccInfo();
-        showAlert(json.message,"success"); 
-      }else{
-        showAlert(json.error,"danger");
+        showAlert(json.message, "success");
+      } else {
+        showAlert(json.error, "danger");
       }
-    }else{
-      const response = await fetch('http://localhost:5050/api/accounts/savToCheq',{
-        method:'PUT',
-        headers:{
-          "Content-Type": "application/json",
-          "authToken": localStorage.getItem("token"),
-        },
-        body: JSON.stringify({
-          amount: amount
-        }),
-      });
+    } else {
+      const response = await fetch(
+        "http://localhost:5050/api/accounts/savToCheq",
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            authToken: localStorage.getItem("token"),
+          },
+          body: JSON.stringify({
+            amount: amount,
+          }),
+        }
+      );
       const json = await response.json();
-      if(json.success){
+      if (json.success) {
         setIsTransferModalOpen(false);
         getAccInfo();
-        showAlert(json.message,"success"); 
-      }else{
-        showAlert(json.error,"danger");
+        showAlert(json.message, "success");
+      } else {
+        showAlert(json.error, "danger");
       }
     }
-  }
+  };
   return (
     <div className="container-sm">
       <div>
@@ -181,14 +186,24 @@ const Home = () => {
                   </div>
                 </div>
                 <div className="col-6">
-                  <div className="d-flex align-items-center justify-content-center">
-                    <div className="p-5">
+                  <div className="d-flex flex-column">
+                    <div className="mx-3 my-2"> 
                       <button
                         className="btn btn-primary btn-lg"
                         onClick={() => setIsTransferModalOpen(true)}
                       >
                         Transfer&#8594;
                       </button>
+                      
+                    </div>
+                    <div className="mx-3 my-2">
+                      <button
+                        className="btn btn-success btn-lg"
+                        onClick={() => setIsTransferModalOpen(true)}
+                      >
+                        Send&#8594;
+                      </button>
+                      
                     </div>
                   </div>
                 </div>
@@ -264,7 +279,11 @@ const Home = () => {
                   >
                     Close
                   </button>
-                  <button type="button" className="btn btn-primary" onClick={transferFunds}>
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={transferFunds}
+                  >
                     Transfer
                   </button>
                 </div>
