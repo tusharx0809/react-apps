@@ -26,10 +26,7 @@ const ProfileState = (props) => {
     }
   };
 
-  const [accInfo, setAccInfo] = useState({
-    cam:0, //chequings amount
-    sam:0, //savings amount
-  });
+  const [accInfo, setAccInfo] = useState(null);
 
   const getAccInfo = async () => {
     const response = await fetch(`${host}/api/accounts/getAccInfo`,{
@@ -40,10 +37,7 @@ const ProfileState = (props) => {
     });
     const json = await response.json();
     if(json.success){
-      setAccInfo({
-        cam: json?.cheqAcc.amount,
-        sam: json?.savAcc.amount
-      });
+      setAccInfo(json);
     }else{
       showAlert("Something went wrong", "danger");
     }
