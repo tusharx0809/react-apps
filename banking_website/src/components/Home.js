@@ -1,23 +1,24 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import profileContext from "../context/Profile/ProfileContext";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const { getUserProfile, user, alert, accInfo, getAccInfo } = useContext(profileContext);
+  const { getUserProfile, user, alert, accInfo, getAccInfo } =
+    useContext(profileContext);
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/login");
     }
-      getUserProfile();
-      getAccInfo();
-      //eslint-disable-next-line
+    getUserProfile();
+    getAccInfo();
+    //eslint-disable-next-line
   }, []);
 
+  const [IsTransferModal, setIsTransferModalOpen] = useState(false);
+
   return (
-    <>
-   
     <div className="container-sm">
       <div>
         {/* Display alert if exists */}
@@ -87,7 +88,10 @@ const Home = () => {
                         className="accordion-collapse collapse"
                         data-bs-parent="#accordionFlushExample"
                       >
-                        <div className="accordion-body"><i class="fa-solid fa-indian-rupee-sign fa-sm"/> {accInfo?.cheqAcc?.amount}</div>
+                        <div className="accordion-body">
+                          <i class="fa-solid fa-indian-rupee-sign fa-sm" />{" "}
+                          {accInfo?.cheqAcc?.amount}
+                        </div>
                       </div>
                     </div>
                     <div className="accordion-item">
@@ -108,22 +112,74 @@ const Home = () => {
                         className="accordion-collapse collapse"
                         data-bs-parent="#accordionFlushExample"
                       >
-                        <div className="accordion-body"><i class="fa-solid fa-indian-rupee-sign fa-sm"/> {accInfo?.savAcc?.amount} </div>
+                        <div className="accordion-body">
+                          <i class="fa-solid fa-indian-rupee-sign fa-sm" />{" "}
+                          {accInfo?.savAcc?.amount}{" "}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="col-6">
-                <div className="d-flex align-items-center justify-content-center">
-                  <div className="p-5"><button className="btn btn-primary btn-lg">Transfer&#8594;</button></div>
-                </div>
+                  <div className="d-flex align-items-center justify-content-center">
+                    <div className="p-5">
+                      <button
+                        className="btn btn-primary btn-lg"
+                        onClick={() => setIsTransferModalOpen(true)}
+                      >
+                        Transfer&#8594;
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div></>
+      {IsTransferModal && (
+        <>
+          {/* Backdrop */}
+          <div className="modal-backdrop fade show"></div>
+
+          {/* Modal */}
+          <div
+            className="modal show"
+            tabIndex="-1"
+            style={{ display: "block" }}
+          >
+            <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Transfer Funds</h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    onClick={() => setIsTransferModalOpen(false)}
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  <p>Modal body text goes here.</p>
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => setIsTransferModalOpen(false)}
+                  >
+                    Close
+                  </button>
+                  <button type="button" className="btn btn-primary">
+                    Save changes
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
   );
 };
 
