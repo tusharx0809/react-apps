@@ -138,7 +138,7 @@ const Home = () => {
               top: "70px",
               left: "50%",
               transform: "translateX(-50%)",
-              zIndex: 10,
+              zIndex: 1051,
               width: "600px",
               padding: "10px",
               textAlign: "center",
