@@ -44,7 +44,36 @@ router.put('/cheqToSav', fetchuser, async(req, res)=>{
     await savAcc.save();
     success = true;
 
-    res.status(200).json({success, message: "Amount transferred to savings account!"});
+    res.status(200).json({success, message: `Amount of ${amount} transferred to Savings Account!`});
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server error");
+  }
+  
+});
+
+router.put('/savToCheq', fetchuser, async(req, res)=>{
+  try {
+    let success = false;
+    const userID = req.user.id;
+    const { amount } = req.body;
+
+
+    const cheqAcc = await CheqAcc.findOne({user: userID});
+    const savAcc = await SavAcc.findOne({user: userID});
+
+    if(amount > cheqAcc.amount){
+      return res.status(400).json({success: false, error: "Not enough amount in Savings Account!"})
+    }
+    savAcc.amount -= amount;
+    cheqAcc.amount += amount;
+
+    await savAcc.save();
+    await cheqAcc.save();
+    
+    success = true;
+
+    res.status(200).json({success, message: `Amount of ${amount} transferred to Chequings Account!`});
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server error");
