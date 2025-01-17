@@ -89,7 +89,7 @@ const Home = () => {
                         data-bs-parent="#accordionFlushExample"
                       >
                         <div className="accordion-body">
-                          <i class="fa-solid fa-indian-rupee-sign fa-sm" />{" "}
+                          <i className="fa-solid fa-indian-rupee-sign fa-sm" />{" "}
                           {accInfo?.cheqAcc?.amount}
                         </div>
                       </div>
@@ -113,7 +113,7 @@ const Home = () => {
                         data-bs-parent="#accordionFlushExample"
                       >
                         <div className="accordion-body">
-                          <i class="fa-solid fa-indian-rupee-sign fa-sm" />{" "}
+                          <i className="fa-solid fa-indian-rupee-sign fa-sm" />{" "}
                           {accInfo?.savAcc?.amount}{" "}
                         </div>
                       </div>
@@ -160,7 +160,28 @@ const Home = () => {
                   ></button>
                 </div>
                 <div className="modal-body">
-                  <p>Modal body text goes here.</p>
+                  <div className="d-flex justify-content-around">
+                    <p className="fs-4 text fw-light my-2">From</p>
+                    <select
+                      className="form-select mx-3"
+                      aria-label="Default select example"
+                    >
+                      
+                      <option value="1">Chequings</option>
+                      <option value="2">Savings</option>
+                    </select>
+                    <p className="fs-4 text fw-light my-2">To</p>
+                    <select
+                      className="form-select mx-3"
+                      aria-label="Default select example"
+                    >
+                     
+                      <option value="1">Chequings</option>
+                      <option value="2">Savings</option>
+                    </select>
+                    
+                  </div>
+                  <input className="form-control my-3" type="text" placeholder="Enter Amount" aria-label="default input example"/>
                 </div>
                 <div className="modal-footer">
                   <button
@@ -171,7 +192,7 @@ const Home = () => {
                     Close
                   </button>
                   <button type="button" className="btn btn-primary">
-                    Save changes
+                    Transfer
                   </button>
                 </div>
               </div>
