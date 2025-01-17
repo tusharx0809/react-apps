@@ -83,6 +83,43 @@ const Home = () => {
       }
     }
   };
+
+  const [receiverDetails, setReceiverDetails] = useState({
+    receiverAmount:"",
+    email:""
+  })
+  const [IsReceiver, IsReceiverModal] = useState(false);
+  const handleReceiverChange = (e) => {
+    setReceiverDetails({
+      ...receiverDetails,
+      [e.target.name]: e.target.value,
+    })
+  }
+
+  const sendMoney = async () => {
+    const recAmount = parseFloat(receiverDetails.receiverAmount);
+    const response = await fetch('http://localhost:5050/api/transfer/transferFunds',{
+      method:'PUT',
+      headers:{
+        "Content-Type":"application/json",
+        "authToken":localStorage.getItem("token"),
+      },
+      body: JSON.stringify({
+        amount: recAmount,
+        receiverMail: receiverDetails.email,
+      }),
+    });
+    const json = await response.json();
+    if(json.success){
+      IsReceiverModal(false);
+      getAccInfo();
+      showAlert(json.message, "success");
+    }else{
+      showAlert(json.error,"danger");
+    }
+  }
+
+
   return (
     <div className="container-sm">
       <div>
@@ -199,7 +236,7 @@ const Home = () => {
                     <div className="mx-3 my-2">
                       <button
                         className="btn btn-success btn-lg"
-                        onClick={() => setIsTransferModalOpen(true)}
+                        onClick={() => IsReceiverModal(true)}
                       >
                         Send&#8594;
                       </button>
@@ -285,6 +322,74 @@ const Home = () => {
                     onClick={transferFunds}
                   >
                     Transfer
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
+{IsReceiver && (
+        <>
+          {/* Backdrop */}
+          <div className="modal-backdrop fade show"></div>
+
+          {/* Modal */}
+          <div
+            className="modal show"
+            tabIndex="-1"
+            style={{ display: "block" }}
+          >
+            <div className="modal-dialog modal-dialog-centered">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Send Money</h5>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    onClick={() => IsReceiverModal(false)}
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  
+                  <input
+                    className="form-control my-3"
+                    type="text"
+                    min="0"
+                    step="0.01"
+                    name="receiverAmount"
+                    value={receiverDetails.receiverAmount}
+                    onChange={handleReceiverChange}
+                    placeholder="Enter Amount..."
+                    aria-label="default input example"
+                  />
+                  <input
+                    className="form-control my-3"
+                    type="email"
+                    min="0"
+                    step="0.01"
+                    name="email"
+                    value={receiverDetails.email}
+                    onChange={handleReceiverChange}
+                    placeholder="Enter email..."
+                    aria-label="default input example"
+                  />
+                </div>
+                <div className="modal-footer">
+                  <button
+                    type="button"
+                    className="btn btn-secondary"
+                    onClick={() => IsReceiverModal(false)}
+                  >
+                    Close
+                  </button>
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={sendMoney}
+                  >
+                    Send Money
                   </button>
                 </div>
               </div>
