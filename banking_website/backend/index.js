@@ -20,6 +20,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/settings', require('./routes/settings'));
 app.use('/api/accounts', require('./routes/accounts'));
 app.use('/api/transfer', require('./routes/transferFunds'));
+
 app.listen(port, ()=>{
     console.log(`Banking Mongo backend is running on http://localhost:${port}`);
 })
