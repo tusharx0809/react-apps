@@ -18,7 +18,6 @@ const Home = () => {
     //eslint-disable-next-line
   }, []);
 
-
   return (
     <div className="container-sm">
       <div>
@@ -49,24 +48,26 @@ const Home = () => {
         )}
       </div>
       <div className="row">
-      <div
-        className="col-sm-12 col-md-6 col-lg-4 mb-4"
-        style={{ marginTop: "70px" }}
-      >
-        <div className="card mb-4">
-          <div className="card-body">
-            <h3 className="card-title">{user?.name}</h3>
-            <h6 className="card-subtitle mb-2 text-muted">{user?.email}</h6>
-            <p className="card-text">Welcome to your account!</p>
-            <a href="#" className="card-link">
-              Report an Issue
-            </a>
+        <div
+          className="col-sm-12 col-md-6 col-lg-4 mb-4"
+          style={{ marginTop: "70px" }}
+        >
+          <div className="card mb-4">
+            <div className="card-body">
+              <h3 className="card-title">{user?.name}</h3>
+              <h6 className="card-subtitle mb-2 text-muted">{user?.email}</h6>
+              <p className="card-text">Welcome to your account!</p>
+              <a href="#" className="card-link">
+                Report an Issue
+              </a>
+            </div>
           </div>
+          <UserAccounts />
         </div>
-        <UserAccounts/>
+        <div className="col-sm-12 col-md-6" style={{ marginTop: "70px" }}>
+          <Transactions />
+        </div>
         
-      </div>
-      <div className="col-sm-12 col-md-6" style={{ marginTop: "70px" }}><Transactions/></div>
       </div>
     </div>
   );

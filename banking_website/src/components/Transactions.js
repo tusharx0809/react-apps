@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from "react";
 import profileContext from "../context/Profile/ProfileContext";
 import html2pdf from "html2pdf.js";
 
+
 const Transactions = () => {
   const { transactions, getTransactions } = useContext(profileContext);
 
@@ -15,9 +16,9 @@ const Transactions = () => {
 
   const handleDownloadPdf = () => {
     const element = document.getElementById("table-to-pdf");
-    html2pdf().from(element).save("table.pdf");
+    html2pdf().from(element).save("statements.pdf");
   };
-
+  
   return (
     <div>
       <div>
@@ -28,6 +29,7 @@ const Transactions = () => {
                 <div className="d-flex justify-content-between">
                   <p className="display-6">Transactions</p>
                   <button
+                    type="button"
                     onClick={handleDownloadPdf}
                     className="btn btn-outline-primary my-3"
                   >
