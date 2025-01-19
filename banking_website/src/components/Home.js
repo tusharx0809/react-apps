@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import UserAccounts from "./UserAccounts";
 
 const Home = () => {
-  const { getUserProfile, user, alert, showAlert, accInfo, getAccInfo } =
+  const { getUserProfile, user, alert, getAccInfo } =
     useContext(profileContext);
   const navigate = useNavigate();
 
@@ -16,7 +16,6 @@ const Home = () => {
     getAccInfo();
     //eslint-disable-next-line
   }, []);
-
 
 
   return (

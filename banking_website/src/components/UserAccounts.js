@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import profileContext from "../context/Profile/ProfileContext";
 const UserAccounts = () => {
-    const { getUserProfile, user, alert, showAlert, accInfo, getAccInfo } =
+    const { showAlert, accInfo, getAccInfo } =
     useContext(profileContext);
     const [IsTransferModal, setIsTransferModalOpen] = useState(false);
       const [accounts, setAccounts] = useState({
