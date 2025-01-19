@@ -43,6 +43,22 @@ const ProfileState = (props) => {
     }
   }
 
+  const [transactions, setTrasactions] = useState(null);
+  const getTransactions = async () => {
+    const response = await fetch(`${host}/api/transactions/getTransactions`,{
+      method:'GET',
+      headers:{
+        "authToken":localStorage.getItem("token"),
+      },
+    });
+    const json = response.json();
+    if(json.success){
+      setTrasactions(json);
+    }else{
+      showAlert(json.error);
+    }
+  }
+
   const logoutUser = () => {
     localStorage.removeItem("token");
     setUser(null);
