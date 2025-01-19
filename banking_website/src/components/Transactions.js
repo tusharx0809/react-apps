@@ -15,10 +15,6 @@ const Transactions = () => {
 
   const handleDownloadPdf = () => {
     const element = document.getElementById("table-to-pdf");
-    // const doc = new jsPDF();
-    // doc.autoTable({html: '#table-to-pdf'});
-    // doc.save('table.pdf');
-
     html2pdf().from(element).save("table.pdf");
   };
 
