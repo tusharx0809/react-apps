@@ -10,6 +10,8 @@ router.put("/transferFunds", fetchuser, async (req, res) => {
     let success = false;
     const { amount, receiverMail } = req.body;
     const senderID = req.user.id;
+    const sender = await User.findById(senderID);
+    
 
     const senderAcc = await CheqAcc.findOne({ user: senderID });
    
@@ -51,7 +53,7 @@ router.put("/transferFunds", fetchuser, async (req, res) => {
     const receiverTransaction = new Transaction({
       user: receiver.id,
       type: "Received",
-      from: req.user.email,
+      from: sender.email,
       to: undefined,
       amount: amount, 
       date: new Date()
