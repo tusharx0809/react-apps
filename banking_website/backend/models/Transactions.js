@@ -9,6 +9,12 @@ const TransactionSchema = new Schema({
     type:{
         type: String,
     },
+    to:{
+        type: String,
+    },
+    from:{
+        type: String,
+    },
     amount: {
         type: Number,
     },
