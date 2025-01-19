@@ -1,6 +1,7 @@
 const express = require("express");
 const CheqAcc = require("../models/ChequingsAccount");
 const SavAcc = require("../models/SavingsAccount");
+const Transaction = require("../models/Transactions");
 const router = express.Router();
 const fetchuser = require("../middleware/fetchuser");
 
