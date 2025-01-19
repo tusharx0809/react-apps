@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import profileContext from "../context/Profile/ProfileContext";
 import { useNavigate } from "react-router-dom";
 import UserAccounts from "./UserAccounts";
+import Transactions from "./Transactions";
 
 const Home = () => {
   const { getUserProfile, user, alert, getAccInfo } =
@@ -47,6 +48,7 @@ const Home = () => {
           </div>
         )}
       </div>
+      <div className="row">
       <div
         className="col-sm-12 col-md-6 col-lg-4 mb-4"
         style={{ marginTop: "70px" }}
@@ -62,6 +64,9 @@ const Home = () => {
           </div>
         </div>
         <UserAccounts/>
+        
+      </div>
+      <div className="col-sm-12 col-md-6" style={{ marginTop: "70px" }}><Transactions/></div>
       </div>
     </div>
   );

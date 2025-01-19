@@ -53,9 +53,9 @@ const ProfileState = (props) => {
     });
     const json = response.json();
     if(json.success){
-      setTrasactions(json);
+      setTrasactions(json.transactions);
     }else{
-      showAlert(json.error);
+      showAlert(json.error,"danger");
     }
   }
 
@@ -74,7 +74,9 @@ const ProfileState = (props) => {
         alert,
         showAlert,
         accInfo,
-        getAccInfo
+        getAccInfo,
+        transactions,
+        getTransactions
       }}
     >
       {props.children}
