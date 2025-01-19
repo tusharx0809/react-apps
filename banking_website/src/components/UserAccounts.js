@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import profileContext from "../context/Profile/ProfileContext";
 const UserAccounts = () => {
-    const { showAlert, accInfo, getAccInfo } =
+    const { showAlert, accInfo, getAccInfo, getTransactions } =
     useContext(profileContext);
     const [IsTransferModal, setIsTransferModalOpen] = useState(false);
       const [accounts, setAccounts] = useState({
@@ -42,6 +42,7 @@ const UserAccounts = () => {
           if (json.success) {
             setIsTransferModalOpen(false);
             getAccInfo();
+            getTransactions();
             showAlert(json.message, "success");
           } else {
             showAlert(json.error, "danger");
@@ -99,6 +100,7 @@ const UserAccounts = () => {
         if(json.success){
           IsReceiverModal(false);
           getAccInfo();
+          getTransactions();
           showAlert(json.message, "success");
         }else{
           showAlert(json.error,"danger");

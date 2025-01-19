@@ -2,12 +2,13 @@ import React, { useEffect, useContext } from "react";
 import profileContext from "../context/Profile/ProfileContext";
 
 const Transactions = () => {
-  const { transactions, getTransactions, user } = useContext(profileContext);
+  const { transactions, getTransactions } = useContext(profileContext);
 
   useEffect(() => {
     getTransactions();
-    console.log(transactions);
   }, []);
+
+  const sortedTransactions = transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
 
   return (
     <div>
@@ -30,15 +31,15 @@ const Transactions = () => {
     </tr>
   </thead>
   <tbody class="table-group-divider">
-    {transactions && transactions.length > 0 ? (
-        transactions.map((transaction, index)=>(
+    {sortedTransactions && sortedTransactions.length > 0 ? (
+        sortedTransactions.map((transaction, index)=>(
             <tr key={index}>
                 <th>{index + 1}</th>
                 <td>{transaction.type}</td>
                 <td>{transaction.from || "Self"}</td>
                 <td>{transaction.to || "Self"}</td>
                 <th>{transaction.amount}</th>
-                <td>{transaction.date}</td>
+                <td>{new Date(transaction.date).toLocaleString()}</td>
             </tr>
         )) 
     ):(<tr>
