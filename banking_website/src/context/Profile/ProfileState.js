@@ -51,7 +51,7 @@ const ProfileState = (props) => {
         "authToken":localStorage.getItem("token"),
       },
     });
-    const json = response.json();
+    const json = await response.json();
     if(json.success){
       setTrasactions(json.transactions);
     }else{
