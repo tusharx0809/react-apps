@@ -1,7 +1,7 @@
 const express = require("express");
 const CheqAcc = require("../models/ChequingsAccount");
-const SavAcc = require("../models/SavingsAccount");
 const User = require("../models/User");
+const Transaction = require("../models/Transactions");
 const router = express.Router();
 const fetchuser = require("../middleware/fetchuser");
 
@@ -39,8 +39,28 @@ router.put("/transferFunds", fetchuser, async (req, res) => {
     senderAcc.amount -= amount;
     receiverAcc.amount += amount;
 
+    const senderTransaction = new Transaction({
+      user: req.user.id,
+      type: "Sent",
+      from: undefined,
+      to: receiverMail,
+      amount: amount, 
+      date: new Date()
+    });
+
+    const receiverTransaction = new Transaction({
+      user: receiver.id,
+      type: "Received",
+      from: req.user.email,
+      to: undefined,
+      amount: amount, 
+      date: new Date()
+    });
+
     await senderAcc.save();
     await receiverAcc.save();
+    await senderTransaction.save();
+    await receiverTransaction.save();
 
     success = true;
     res.status(200).json({success, message:`Amount of ${amount} sent to ${receiverMail}`});
