@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import profileContext from "../context/Profile/ProfileContext";
+import html2pdf from "html2pdf.js";
 
 const Transactions = () => {
   const { transactions, getTransactions } = useContext(profileContext);
@@ -8,9 +9,18 @@ const Transactions = () => {
     getTransactions();
   }, [getTransactions]);
 
-   const sortedTransactions = Array.isArray(transactions)
+  const sortedTransactions = Array.isArray(transactions)
     ? transactions.sort((a, b) => new Date(b.date) - new Date(a.date))
     : [];
+
+  const handleDownloadPdf = () => {
+    const element = document.getElementById("table-to-pdf");
+    // const doc = new jsPDF();
+    // doc.autoTable({html: '#table-to-pdf'});
+    // doc.save('table.pdf');
+
+    html2pdf().from(element).save("table.pdf");
+  };
 
   return (
     <div>
@@ -19,9 +29,17 @@ const Transactions = () => {
           <div className="card-body">
             <div className="d-flex justify-content-around">
               <div className="col-12">
-                <p className="display-6">Transactions</p>
+                <div className="d-flex justify-content-between">
+                  <p className="display-6">Transactions</p>
+                  <button
+                    onClick={handleDownloadPdf}
+                    className="btn btn-outline-primary my-3"
+                  >
+                    Download &darr;
+                  </button>
+                </div>
                 <div className="table-responsive">
-                  <table class="table w-100">
+                  <table id="table-to-pdf" className="table w-100">
                     <thead>
                       <tr>
                         <th scope="col">S.No</th>
@@ -32,7 +50,7 @@ const Transactions = () => {
                         <th scope="col">Date</th>
                       </tr>
                     </thead>
-                    <tbody class="table-group-divider">
+                    <tbody className="table-group-divider">
                       {sortedTransactions && sortedTransactions.length > 0 ? (
                         sortedTransactions.map((transaction, index) => (
                           <tr key={index}>
