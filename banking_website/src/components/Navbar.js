@@ -63,10 +63,18 @@ const Navbar = () => {
                 Logout
               </button>
             ) : (
-              <Link to="/verifyemail">
-              <button type="button" className="btn btn-outline-light">
-                Get Your email verified!
-              </button></Link>
+              <>
+                <Link to="/emplogin">
+                  <button type="button" className="btn btn-outline-secondary mx-3">
+                    Employee Login
+                  </button>
+                </Link>
+                <Link to="/verifyemail">
+                  <button type="button" className="btn btn-outline-light">
+                    Get Your email verified!
+                  </button>
+                </Link>
+              </>
             )}
           </div>
         </div>
