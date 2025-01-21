@@ -10,6 +10,8 @@ import Verifyemail from "./components/Verifyemail";
 import Emailverification from "./components/Emailverification";
 import Settings from "./components/Settings";
 import Emplogin from "./components/Emplogin";
+import Emphome from "./components/Emphome";
+import Empverification from "./components/Empverification";
 
 function App() {
   return (
@@ -25,6 +27,8 @@ function App() {
           <Route path="/emailverification" element={<Emailverification />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/emplogin" element={<Emplogin />} />
+          <Route path="/emphome" element={<Emphome />} />
+          <Route path="/empverify" element={<Empverification />} />
         </Routes>
       </Router>
     </ProfileState>

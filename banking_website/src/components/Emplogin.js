@@ -1,7 +1,41 @@
-import React from 'react'
+import React, {useContext, useState} from 'react'
+import profileContext from '../context/Profile/ProfileContext';
+import { useNavigate } from 'react-router-dom';
 
 const Emplogin = () => {
+  const { alert, showAlert } = useContext(profileContext);
+  const navigate = useNavigate();
+  const [empDetails, setEmpDetails] = useState({
+    empid:"",
+    password:"",
+  });
 
+
+  const handleChange = (e) =>{
+    setEmpDetails({...empDetails, [e.target.name]: e.target.value})
+  }
+
+  const emplogin = async (e) =>{
+    e.preventDefault();
+    const response = await fetch('http://localhost:5050/api/employees/emplogin',{
+      method: "POST",
+      headers:{
+        "Content-Type":"application/json",
+      },
+      body: JSON.stringify({
+        empid: empDetails.empid,
+        password: empDetails.password,
+      })
+    })
+    const json = await response.json();
+    if(json.success){
+      localStorage.setItem("token", json.authToken);
+      navigate("/empverify");
+      showAlert("An otp has been sent to registered email.","success");
+    }else{
+      showAlert("Somethins went wrong, try again!","danger");
+    }
+  } 
   return (
     <div className="container d-flex align-items-center justify-content-center" style={{ minHeight: "90vh" }}>
       <div>
@@ -32,18 +66,18 @@ const Emplogin = () => {
         )}
       </div>
         <div className="card p-4" style={{ width: "100%", maxWidth: "400px" }}>
-      <form> 
+      <form onSubmit={emplogin}> 
       <h2 className="text-center mb-4">Employee Login</h2>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Emp ID
           </label>
           <input
-            type="email"
+            type="text"
             className="form-control"
-            id="email"
-            name="email"
-            // onChange = {handleChange}
+            id="empid"
+            name="empid"
+            onChange = {handleChange}
             placeholder="Enter employee ID..."
           />
           
@@ -57,7 +91,7 @@ const Emplogin = () => {
             className="form-control"
             id="password"
             name="password"
-            // onChange={handleChange}
+            onChange={handleChange}
             placeholder="Enter password..."
           />
         </div>
