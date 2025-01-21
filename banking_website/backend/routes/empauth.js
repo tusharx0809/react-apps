@@ -6,6 +6,7 @@ const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const JWT_SECRET = process.env.SECRET_JWT;
+const fetchemp = require("../middleware/fetchemp");
 
 router.post(
   "/createEmployee",
@@ -65,5 +66,58 @@ router.post(
     }
   }
 );
+router.post(
+  "/emplogin",
+  [
+    body("empid", "Enter Empid").notEmpty(),
+    body("password", "Password cannot be blank").exists(),
+  ],
+  async (req, res) => {
+    let success = false;
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    const { empid, password } = req.body;
+    try {
+      const employee = await Employee.findOne({ empid: empid });
+            if (!employee) {
+              return res.status(400).json({ error: "Invalid Credentials" });
+            }
+            const passwordCompare = await bcrypt.compare(password, employee.password);
+            if (!passwordCompare) {
+              return res.status(400).json({ error: "Invalid Credentials" });
+            }
+      
+            const payload = {
+              employee: {
+                id: employee.id,
+              },
+            };
+            const authToken = jwt.sign(payload, JWT_SECRET);
+            success = true;
+            res.json({ success, authToken });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server error");
+    }
+  }
+);
+router.get("/getEmp", fetchemp, async (req, res) => {
+  let success = false;
+  try {
+    const emp = await Employee.findById(req.employee.id).select(
+      "-password"
+    );
+    if (!emp) {
+      return res.status(400).json({ success, error: "Employee not found" });
+    }
+    success = true;
+    res.json({success, emp});
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server error");
+  }
+});
 
 module.exports = router;
