@@ -11,7 +11,7 @@ router.post(
   "/createEmployee",
   [
     body("empid", "Enter an Emplyee Id").isLength({ min: 5 }),
-    body("name", "Enter employee name") / isLength({ min: 3 }),
+    body("name", "Enter employee name").isLength({ min: 3 }),
     body("password", "Enter password for employee").isLength({ min: 8 }),
     body("position", "Enter employee position").isLength({ min: 3 }),
     body("phone", "Enter phone number").isLength({ min: 10 }),
@@ -27,16 +27,14 @@ router.post(
     try {
       let employee = await Employee.findOne({ empdid: req.body.empid });
       if (employee) {
-        return res
-          .status(400)
-          .json({
-            success,
-            error:
-              "An employee is already there with this emp id, try again with another!",
-          });
+        return res.status(400).json({
+          success,
+          error:
+            "An employee is already there with this emp id, try again with another!",
+        });
       }
       const salt = await bcrypt.genSalt(10);
-      const secPassword = await bcrypt.hash(req.body.secPassword, salt);
+      const secPassword = await bcrypt.hash(req.body.password, salt);
 
       employee = new Employee({
         empid: req.body.empid,
@@ -56,15 +54,13 @@ router.post(
 
       const authToken = jwt.sign(data, JWT_SECRET);
       success = true;
-      res
-        .status(200)
-        .json({
-          success,
-          authToken,
-          message: `Employee with ID:${req.body.empid} created successfully!`,
-        });
+      res.status(200).json({
+        success,
+        authToken,
+        message: `Employee with ID:${req.body.empid} created successfully!`,
+      });
     } catch (error) {
-        console.error(message);
+      console.error(error);
       res.status(500).send("Internal Server error");
     }
   }
