@@ -5,18 +5,24 @@ const EmpSchema = new Schema({
     empid:{
         type: String,
         required: true,
+        unique: true
     },
     name:{
         type: String,
         required: true,
     },
-    phone:{
-        type: String,
-    },
     password:{
         type: String,
         required: true,
-    }
+    },
+    position:{
+        type: String,
+        default: null,
+    },
+    phone:{
+        type: String,
+        default: null
+    } 
 })
 
 module.exports = mongoose.model('Employee', EmpSchema);
