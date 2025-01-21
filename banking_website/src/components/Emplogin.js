@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
 
 const Emplogin = () => {
 
@@ -45,7 +44,7 @@ const Emplogin = () => {
             id="email"
             name="email"
             // onChange = {handleChange}
-            placeholder="Enter email..."
+            placeholder="Enter employee ID..."
           />
           
         </div>
@@ -66,8 +65,6 @@ const Emplogin = () => {
         <button type="submit" className="btn btn-primary">
           LogIn
         </button>
-        <Link to="/signup">
-        </Link>
       </form>
       </div>
     </div>
