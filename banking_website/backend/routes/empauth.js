@@ -142,9 +142,7 @@ router.put("/verifyEmpOtp", fetchemp, async (req, res) => {
         .json({ success, error: "Invalid or expired OTP, please try again!" });
     }
 
-    emp.loginOTP = null, 
-    emp.loginOtpExp = null,
-    await emp.save();
+    (emp.loginOTP = null), (emp.loginOtpExp = null), await emp.save();
 
     success = true;
     res.status(200).json({ success, message: "Login successful" });
