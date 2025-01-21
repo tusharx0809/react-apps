@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const EmpSchema = new Schema({
-    emid:{
+    empid:{
         type: String,
         required: true,
     },
@@ -19,4 +19,4 @@ const EmpSchema = new Schema({
     }
 })
 
-module.exports = mongoose.model('Employee', emp);
+module.exports = mongoose.model('Employee', EmpSchema);
