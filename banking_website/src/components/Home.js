@@ -3,6 +3,7 @@ import profileContext from "../context/Profile/ProfileContext";
 import { useNavigate } from "react-router-dom";
 import UserAccounts from "./UserAccounts";
 import Transactions from "./Transactions";
+import Currencyconverter from "./Currencyconverter";
 
 const Home = () => {
   const { getUserProfile, user, alert, getAccInfo } =
@@ -63,6 +64,7 @@ const Home = () => {
             </div>
           </div>
           <UserAccounts />
+          <Currencyconverter />
         </div>
         <div className="col-sm-12 col-md-6" style={{ marginTop: "70px" }}>
           <Transactions />
