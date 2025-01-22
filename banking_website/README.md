@@ -7,6 +7,7 @@
     <li>Checquings and Savings Account creation at the time of account creation.</li>
     <li>Transfer between Savings and Checquings Account.</li>
     <li>Send money to users using email id.</li>
+    <li>Renew password which required current password</li>
 </ul>
 
 <h2>Employee Features</h2>
