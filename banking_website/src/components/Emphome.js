@@ -14,7 +14,7 @@ const Emphome = () => {
     // eslint-disable-next-line
   }, []);
   return (
-    <div>
+    <div className="container-sm">
       <div>
         {/* Display alert if exists */}
         {alert && alert.message && alert.type && (
@@ -42,7 +42,26 @@ const Emphome = () => {
           </div>
         )}
       </div>
-     {emp?.empid}
+      <div className="row">
+        <div
+          className="col-sm-12 col-md-6 col-lg-4 mb-4"
+          style={{ marginTop: "70px" }}
+        >
+          <div className="card mb-4">
+            <div className="card-body">
+              <h3 className="card-title">{emp?.name}</h3>
+              <h6 className="card-subtitle mb-2 text-muted">{emp?.name}</h6>
+              <p className="card-text">{emp?.position}</p>
+              
+            </div>
+          </div>
+          
+        </div>
+        <div className="col-sm-12 col-md-6" style={{ marginTop: "70px" }}>
+         
+        </div>
+        
+      </div>
     </div>
   )
 }
