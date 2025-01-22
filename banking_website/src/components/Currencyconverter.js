@@ -165,20 +165,29 @@ const Currencyconverter = () => {
     "ZWL": "Zimbabwe"
   };
 
-  // State to manage the search query
   const [searchQuery, setSearchQuery] = useState("");
+  const [fromCurrency, setFromCurrency] = useState("");
+  const [toCurrency, setToCurrency] = useState("");
 
   // Filtered currencies based on search query
   const filteredCurrencies = Object.keys(currencies).filter(currencyCode =>
     `${currencyCode} ${currencies[currencyCode]}`.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const renderCurrencyOptions = () => {
+  const renderCurrencyOptions = (currencyType) => {
     return filteredCurrencies.map((currencyCode) => (
-      <li key={currencyCode} style={{ listStyleType: "none" }}>
+      <li key={currencyCode} onClick={() => handleCurrencySelect(currencyType, currencyCode)}>
         <a className="dropdown-item">{currencyCode}</a>
       </li>
     ));
+  };
+
+  const handleCurrencySelect = (currencyType, currencyCode) => {
+    if (currencyType === "from") {
+      setFromCurrency(currencyCode);
+    } else if (currencyType === "to") {
+      setToCurrency(currencyCode);
+    }
   };
 
   return (
@@ -199,16 +208,16 @@ const Currencyconverter = () => {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    Select Currency
+                    {fromCurrency ? `${fromCurrency}` : "Select Currency"}
                   </button>
-                  <div className="dropdown-menu" style={{maxHeight:"200px", overflowY:"auto"}}>
+                  <div className="dropdown-menu" style={{ maxHeight: "200px", overflowY: "auto" }}>
                     <input
                       type="text"
                       className="form-control"
                       placeholder="Search Currency"
                       onChange={(e) => setSearchQuery(e.target.value)}
                     />
-                    <ul>{renderCurrencyOptions()}</ul>
+                    <ul style={{ listStyleType: "none" }}>{renderCurrencyOptions("from")}</ul>
                   </div>
                 </div>
               </div>
@@ -221,16 +230,16 @@ const Currencyconverter = () => {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    Select Currency
+                    {toCurrency ? `${toCurrency}` : "Select Currency"}
                   </button>
-                  <div className="dropdown-menu" style={{maxHeight:"200px", overflowY:"auto"}}>
+                  <div className="dropdown-menu" style={{ maxHeight: "200px", overflowY: "auto" }}>
                     <input
                       type="text"
                       className="form-control"
                       placeholder="Search Currency"
                       onChange={(e) => setSearchQuery(e.target.value)}
                     />
-                    <ul>{renderCurrencyOptions()}</ul>
+                    <ul style={{ listStyleType: "none" }}>{renderCurrencyOptions("to")}</ul>
                   </div>
                 </div>
               </div>
