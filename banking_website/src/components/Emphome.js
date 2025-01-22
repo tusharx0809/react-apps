@@ -1,6 +1,7 @@
 import React,{ useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import profileContext from '../context/Profile/ProfileContext';
+import Currencyconverter from './Currencyconverter';
 
 const Emphome = () => {
   const { alert, showAlert, emp, getEmp } = useContext(profileContext);
@@ -55,7 +56,7 @@ const Emphome = () => {
               
             </div>
           </div>
-          
+          <Currencyconverter/>
         </div>
         <div className="col-sm-12 col-md-6" style={{ marginTop: "70px" }}>
          
