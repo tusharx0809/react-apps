@@ -247,7 +247,8 @@ const Currencyconverter = () => {
         return;
       }
 
-      setOutputCurrency(inputAmount * multiplicationFactor);
+      setOutputCurrency(Number((inputAmount * multiplicationFactor).toFixed(3)));
+
     } catch (error) {
       console.error("Error during currency conversion:", error);
       showAlert("Something went wrong. Please try again.","danger");
@@ -336,7 +337,7 @@ const Currencyconverter = () => {
               </button>{" "}
             </div>
           </div>
-          <div>Converted currency: {outputCurrency}</div>
+          <p className="fs-5 fw-light">Converted currency: <strong>{toCurrency}{" "}{outputCurrency}</strong></p>
         </div>
       </div>
     </div>
