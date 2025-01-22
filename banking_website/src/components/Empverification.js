@@ -14,7 +14,7 @@ const Empverification = () => {
     const response = await fetch('http://localhost:5050/api/employees/verifyEmpOtp',{
         method:"PUT",
         headers:{
-            "authToken":localStorage.getItem("token"),
+            "empAuthToken":localStorage.getItem("empAuthToken"),
             "Content-Type":"application/json"
         },
         body: JSON.stringify({

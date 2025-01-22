@@ -29,7 +29,7 @@ const Emplogin = () => {
     })
     const json = await response.json();
     if(json.success){
-      localStorage.setItem("token", json.authToken);
+      localStorage.setItem("empAuthToken", json.authToken);
       navigate("/empverify");
       showAlert("An otp has been sent to registered email.","success");
     }else{

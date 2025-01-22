@@ -59,6 +59,22 @@ const ProfileState = (props) => {
     }
   }
 
+  const [emp, setEmp] = useState(null);
+  const getEmp = async () => {
+    const response = await fetch('http://localhost:5050/api/employees/getEmp',{
+      method:'GET',
+      headers:{
+        empAuthToken: localStorage.getItem('empAuthToken')
+      },
+    });
+    const json = await response.json();
+    if(json.success){
+      setEmp(json.emp);
+    }else{
+      showAlert(json.error,"danger");
+    }
+  }
+ 
   const logoutUser = () => {
     localStorage.removeItem("token");
     setUser(null);
@@ -76,7 +92,9 @@ const ProfileState = (props) => {
         accInfo,
         getAccInfo,
         transactions,
-        getTransactions
+        getTransactions,
+        emp,
+        getEmp
       }}
     >
       {props.children}

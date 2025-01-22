@@ -3,9 +3,9 @@ const JWT_SECRET = process.env.SECRET_JWT;
 
 const fetchemp = (req, res, next) => {
   //get the user from jwt token and add id to req object
-  const token = req.header("authToken");
+  const emptoken = req.header("empAuthToken");
   //console.log(token);
-  if (!token) {
+  if (!emptoken) {
     res
       .status(401)
       .send({
@@ -13,7 +13,7 @@ const fetchemp = (req, res, next) => {
       });
   }
   try {
-    const data = jwt.verify(token, JWT_SECRET);
+    const data = jwt.verify(emptoken, JWT_SECRET);
     //console.log(data);
     req.employee = data.employee;
 
