@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Transaction = require("../models/Transactions");
 const fetchuser = require("../middleware/fetchuser");
-const Transactions = require('../models/Transactions');
 
 router.get('/getTransactions', fetchuser, async(req, res)=>{
     try {
@@ -15,7 +14,7 @@ router.get('/getTransactions', fetchuser, async(req, res)=>{
         success = true;
         res.status(200).json({success, transactions});
     } catch (error) {
-        console.error(message);
+        console.error(error);
       res.status(500).send("Internal Server error");
     }
 });
