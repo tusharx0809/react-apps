@@ -176,7 +176,7 @@ const Currencyconverter = () => {
   const renderCurrencyOptions = () => {
     return filteredCurrencies.map((currencyCode) => (
       <li key={currencyCode} style={{ listStyleType: "none" }}>
-        <a className="dropdown-item">{currencyCode} ({currencies[currencyCode]})</a>
+        <a className="dropdown-item">{currencyCode}</a>
       </li>
     ));
   };
