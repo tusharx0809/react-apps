@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import profileContext from "../context/Profile/ProfileContext";
 
 const Navbar = () => {
-  const { user, logoutUser } = useContext(profileContext);
+  const { user, logoutUser, emp } = useContext(profileContext);
   const navigate = useNavigate();
 
   const logout = () => {
@@ -58,7 +58,7 @@ const Navbar = () => {
                 </>
               )}
             </ul>
-            {user ? ( // Only display if user is not null
+            {user || emp ? ( // Only display if user is not null
               <button className="btn btn-danger" onClick={logout}>
                 Logout
               </button>

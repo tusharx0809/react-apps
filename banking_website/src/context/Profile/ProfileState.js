@@ -76,8 +76,15 @@ const ProfileState = (props) => {
   }
  
   const logoutUser = () => {
-    localStorage.removeItem("token");
-    setUser(null);
+    if(localStorage.getItem("token")){
+      localStorage.removeItem("token");
+      setUser(null);
+    }
+    if(localStorage.getItem("empAuthToken")){
+      localStorage.removeItem("empAuthToken");
+      setEmp(null);
+    }
+    
   };
 
   return (
