@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import profileContext from "../context/Profile/ProfileContext";
 import { useNavigate } from "react-router-dom";
 import UserAccounts from "./UserAccounts";
 import Transactions from "./Transactions";
 import Currencyconverter from "./Currencyconverter";
+import InvestmentOptions from "./InvestmentOptions";
 
 const Home = () => {
   const { getUserProfile, user, alert, getAccInfo } =
@@ -68,7 +69,7 @@ const Home = () => {
         </div>
         <div className="col-sm-12 col-md-6" style={{ marginTop: "70px" }}>
           <Transactions />
-          <Transactions/>
+          <InvestmentOptions />
         </div>
         
       </div>

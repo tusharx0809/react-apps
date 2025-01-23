@@ -226,8 +226,10 @@ const Currencyconverter = () => {
     }
 
     try {
+      const date = new Date();
+      const formattedDate = date.toISOString().slice(0, 10);
       const response = await fetch(
-        `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/${fromCurrency.toLowerCase()}.json`,
+        `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@${formattedDate}/v1/currencies/${fromCurrency.toLowerCase()}.json`,
         {
           method: "GET",
         }
@@ -247,7 +249,7 @@ const Currencyconverter = () => {
         return;
       }
 
-      setOutputCurrency(Number((inputAmount * multiplicationFactor).toFixed(3)));
+      setOutputCurrency(Number((inputAmount * multiplicationFactor).toFixed(4)));
 
     } catch (error) {
       console.error("Error during currency conversion:", error);
