@@ -1,13 +1,13 @@
-import React, { useContext } from 'react'
-import profileContext from '../context/Profile/ProfileContext'
-const LoansAndInvestments = () => {
+import React, { useContext } from "react";
+import profileContext from "../context/Profile/ProfileContext";
 
-    const { alert, showAlert } = useContext(profileContext);
+const LoansAndInvestments = () => {
+  const { alert, showAlert } = useContext(profileContext);
 
   return (
-    <div className='container-sm'> 
-    <div>
-        {/* Display alert if exists */}
+    <div className="container-sm">
+      {/* Alert Section */}
+      <div>
         {alert && alert.message && alert.type && (
           <div
             className={`alert ${
@@ -26,16 +26,44 @@ const LoansAndInvestments = () => {
               width: "600px",
               padding: "10px",
               textAlign: "center",
-              // borderRadius: "20px",
             }}
           >
             {alert.message}
           </div>
         )}
       </div>
-      This is loans and investments.
-    </div>
-  )
-}
 
-export default LoansAndInvestments
+      {/* Cards Section */}
+      <div className="row" style={{ marginTop: "70px" }}>
+        <div className="col-md-6">
+          <div className="card" style={{ height: "351px" }}>
+            <div className="card-body">
+              <div className="d-flex justify-content-around">
+                <div className="col-12">
+                  <div className="d-flex justify-content-between">
+                    <p className="fs-3 fw-light">Apply for Loans</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="card" style={{ height: "351px" }}>
+            <div className="card-body">
+              <div className="d-flex justify-content-around">
+                <div className="col-12">
+                  <div className="d-flex justify-content-between">
+                    <p className="fs-3 fw-light">Apply for Investments Plans</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default LoansAndInvestments;
