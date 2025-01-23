@@ -1,13 +1,24 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import profileContext from '../context/Profile/ProfileContext'
+import { useNavigate } from 'react-router-dom';
 
 const Settings = () => {
-  const { alert, showAlert } = useContext(profileContext);
+  const navigate = useNavigate();
+  const { alert, showAlert, user, getUserProfile } = useContext(profileContext);
   const [passwords, setPasswords] = useState({
     curpassword:"",
     password:"",
     cpassword:"",
   })
+
+  useEffect(() => {
+      if (!localStorage.getItem("token")) {
+        navigate("/login");
+      }
+      getUserProfile();
+      //eslint-disable-next-line
+    }, []);
+
   const handleChange = (e) => {
     setPasswords({...passwords, [e.target.name]:e.target.value});
   }

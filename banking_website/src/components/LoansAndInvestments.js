@@ -1,9 +1,17 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import profileContext from "../context/Profile/ProfileContext";
+import { useNavigate } from "react-router-dom";
 
 const LoansAndInvestments = () => {
-  const { alert, showAlert } = useContext(profileContext);
-
+  const navigate = useNavigate();
+  const { alert, showAlert, user, getUserProfile } = useContext(profileContext);
+  useEffect(() => {
+    if (!localStorage.getItem("token")) {
+      navigate("/login");
+    }
+    getUserProfile();
+    //eslint-disable-next-line
+  }, []);
   return (
     <div className="container-sm">
       {/* Alert Section */}
