@@ -67,7 +67,7 @@ const Home = () => {
           <UserAccounts />
           <Currencyconverter />
         </div>
-        <div className="col-sm-12 col-md-6" style={{ marginTop: "70px" }}>
+        <div className="col-sm-12 col-md-8" style={{ marginTop: "70px" }}>
           <Transactions />
           <InvestmentOptions />
         </div>

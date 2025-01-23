@@ -12,6 +12,7 @@ import Settings from "./components/Settings";
 import Emplogin from "./components/Emplogin";
 import Emphome from "./components/Emphome";
 import Empverification from "./components/Empverification";
+import LoansAndInvestments from "./components/LoansAndInvestments";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/emplogin" element={<Emplogin />} />
           <Route path="/emphome" element={<Emphome />} />
           <Route path="/empverify" element={<Empverification />} />
+          <Route path="/loansinvestments" element={<LoansAndInvestments />} />
         </Routes>
       </Router>
     </ProfileState>

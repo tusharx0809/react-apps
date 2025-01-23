@@ -20,7 +20,7 @@ const Transactions = () => {
   };
   
   return (
-    <div>
+    
       <div>
         <div className="card" style={{ height: "351px", overflowY: "scroll" }}>
           <div className="card-body">
@@ -75,24 +75,7 @@ const Transactions = () => {
           </div>
         </div>
       </div>
-      <style>
-        {`
-          .table-responsive {
-            overflow-x: auto; 
-          }
-          .table td {
-            word-wrap: break-word;
-            word-break: break-word;
-            white-space: normal; 
-            max-width: 2000px;  
-          }
-          
-          .table th {
-            white-space: nowrap;
-          }
-        `}
-      </style>
-    </div>
+    
   );
 };
 

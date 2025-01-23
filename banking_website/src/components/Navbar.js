@@ -51,7 +51,7 @@ const Navbar = () => {
                     <Link
                       className="nav-link active"
                       aria-current="page"
-                      to="/"
+                      to="/loansinvestments"
                     >
                       <button className="btn btn-dark">Loans & Investments</button>
                     </Link>
