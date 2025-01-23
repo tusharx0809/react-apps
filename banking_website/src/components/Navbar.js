@@ -43,7 +43,17 @@ const Navbar = () => {
                       aria-current="page"
                       to="/"
                     >
-                      Home
+                      <button className="btn btn-dark">Home</button>
+                      
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      className="nav-link active"
+                      aria-current="page"
+                      to="/"
+                    >
+                      <button className="btn btn-dark">Loans & Investments</button>
                     </Link>
                   </li>
                   <li className="nav-item">
@@ -52,7 +62,7 @@ const Navbar = () => {
                       aria-current="page"
                       to="/settings"
                     >
-                      Settings
+                      <button className="btn btn-dark">Settings</button>
                     </Link>
                   </li>
                 </>
