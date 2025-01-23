@@ -68,6 +68,7 @@ const Home = () => {
         </div>
         <div className="col-sm-12 col-md-6" style={{ marginTop: "70px" }}>
           <Transactions />
+          <Transactions/>
         </div>
         
       </div>
