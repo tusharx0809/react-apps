@@ -9,6 +9,7 @@ const Navbar = () => {
   const logout = () => {
     logoutUser();
     navigate("/login");
+
   };
 
   
