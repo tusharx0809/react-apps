@@ -35,7 +35,7 @@ const Navbar = () => {
                     onChange={enableDarkMode}
                   />
                   <label className={`form-check-label ${mode === "light" ? "text-white" : ""}`} for="flexSwitchCheckDefault">
-                    {mode === "dark" ? "Dark Mode" : "Light Mode"}
+                    {mode === "dark" ? "Light Mode" : "Dark Mode"}
                   </label>
                 </div>
           <button
