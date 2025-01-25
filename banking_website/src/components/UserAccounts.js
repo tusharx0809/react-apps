@@ -17,14 +17,14 @@ const UserAccounts = () => {
         });
       };
       const transferFunds = async () => {
-        const amount = parseFloat(accounts.amount);
+        const numAmount = parseFloat(accounts.amount);
     
         if (accounts.from === accounts.to) {
           showAlert("Cannot transfer to same account! Try Again!", "danger");
           setIsTransferModalOpen(false);
           return;
         }
-        if (accounts.from === "Checquings") {
+        if (accounts.from === "Checquings" && accounts.to === "Savings") {
           const response = await fetch(
             "http://localhost:5050/api/accounts/cheqToSav",
             {
@@ -34,7 +34,7 @@ const UserAccounts = () => {
                 authToken: localStorage.getItem("token"),
               },
               body: JSON.stringify({
-                amount: amount,
+                amount: numAmount,
               }),
             }
           );
@@ -47,7 +47,7 @@ const UserAccounts = () => {
           } else {
             showAlert(json.error, "danger");
           }
-        } else {
+        } else if(accounts.from === "Savings" && accounts.to === "Checquings") {
           const response = await fetch(
             "http://localhost:5050/api/accounts/savToCheq",
             {
@@ -57,7 +57,7 @@ const UserAccounts = () => {
                 authToken: localStorage.getItem("token"),
               },
               body: JSON.stringify({
-                amount: amount,
+                amount: numAmount,
               }),
             }
           );
