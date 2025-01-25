@@ -9,9 +9,11 @@
     <li>Send money to users using email id.</li>
     <li>Renew password which required current password</li>
     <li> Currency Converter accoording to latest currencies. Special Thanks to @fawazahmed0 for currency converter api.<li>
+    <li>Toggle Dark/Light Mode</li>
 </ul>
 
 <h2>Employee Features</h2>
 <ul>
     <li>Login with empID and OTP verification.</li>
+    <li>Toggle Dark/Light Mode</li>
 </ul>
