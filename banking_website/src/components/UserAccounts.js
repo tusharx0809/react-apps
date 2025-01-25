@@ -215,7 +215,7 @@ const UserAccounts = () => {
             style={{ display: "block" }}
           >
             <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content">
+              <div className={`modal-content ${mode === "dark" ? "bg-dark text-white" : "bg-light text-dark"}`}>
                 <div className="modal-header">
                   <h5 className="modal-title">Transfer Funds</h5>
                   <button
@@ -295,7 +295,7 @@ const UserAccounts = () => {
             style={{ display: "block" }}
           >
             <div className="modal-dialog modal-dialog-centered">
-              <div className="modal-content">
+              <div className={`modal-content ${mode === "dark" ? "bg-dark text-white" : "bg-light text-dark"}`}>
                 <div className="modal-header">
                   <h5 className="modal-title">Send Money</h5>
                   <button
