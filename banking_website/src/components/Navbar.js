@@ -22,6 +22,7 @@ const Navbar = () => {
           <Link className="navbar-brand text-decoration-none" to="/">
             Banking
           </Link>
+          
           <button
             className="navbar-toggler"
             type="button"
@@ -35,6 +36,7 @@ const Navbar = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0 mx-2">
+              
               {user && ( // Only display if user is not null
                 <>
                   <li className="nav-item">
@@ -44,7 +46,6 @@ const Navbar = () => {
                       to="/"
                     >
                       <button className="btn btn-dark">Home</button>
-                      
                     </Link>
                   </li>
                   <li className="nav-item">
@@ -53,7 +54,9 @@ const Navbar = () => {
                       aria-current="page"
                       to="/loansinvestments"
                     >
-                      <button className="btn btn-dark">Loans & Investments</button>
+                      <button className="btn btn-dark">
+                        Loans & Investments
+                      </button>
                     </Link>
                   </li>
                   <li className="nav-item">
@@ -75,7 +78,10 @@ const Navbar = () => {
             ) : (
               <>
                 <Link to="/emplogin">
-                  <button type="button" className="btn btn-outline-secondary mx-3">
+                  <button
+                    type="button"
+                    className="btn btn-outline-secondary mx-3"
+                  >
                     Employee Login
                   </button>
                 </Link>
