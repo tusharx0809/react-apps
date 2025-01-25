@@ -7,7 +7,7 @@ import Currencyconverter from "./Currencyconverter";
 import InvestmentOptions from "./InvestmentOptions";
 
 const Home = () => {
-  const { getUserProfile, user, alert, getAccInfo } =
+  const { getUserProfile, user, alert, getAccInfo, mode } =
     useContext(profileContext);
   const navigate = useNavigate();
 
@@ -42,7 +42,6 @@ const Home = () => {
               width: "600px",
               padding: "10px",
               textAlign: "center",
-              // borderRadius: "20px",
             }}
           >
             {alert.message}
@@ -54,9 +53,17 @@ const Home = () => {
           className="col-sm-12 col-md-6 col-lg-4 mb-4"
           style={{ marginTop: "70px" }}
         >
-          <div className="card mb-4">
+          <div
+            className={`card mb-4 ${
+              mode === "dark" ? "bg-dark text-white" : "bg-light text-dark"
+            }`}
+          >
             <div className="card-body">
-              <h3 className="card-title">{user?.name}</h3>
+              <div className="d-flex justify-content-between">
+                <div>
+                  <h3 className="card-title">{user?.name} </h3>
+                </div>
+              </div>
               <h6 className="card-subtitle mb-2 text-muted">{user?.email}</h6>
               <p className="card-text">Welcome to your account!</p>
               <a href="#" className="card-link">
@@ -71,7 +78,6 @@ const Home = () => {
           <Transactions />
           <InvestmentOptions />
         </div>
-        
       </div>
     </div>
   );

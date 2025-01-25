@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Settings = () => {
   const navigate = useNavigate();
-  const { alert, showAlert, user, getUserProfile } = useContext(profileContext);
+  const { alert, showAlert, user, getUserProfile, mode } = useContext(profileContext);
   const [passwords, setPasswords] = useState({
     curpassword:"",
     password:"",
@@ -80,7 +80,9 @@ const Settings = () => {
 
           <div className="col-sm-12 col-md-6 col-lg-4 mb-4">
             {/* First Card */}
-            <div className="card p-4">
+            <div className={`card p-4 ${
+              mode === "dark" ? "bg-dark text-white" : "bg-light text-dark"
+            }`}>
               <form onSubmit={renewPassword}>
                 <h2 className="text-center mb-4">Renew Password</h2>
                 <div className="d-flex align-items-center justify-content-center mb-3">

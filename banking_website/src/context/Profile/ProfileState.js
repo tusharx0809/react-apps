@@ -86,6 +86,18 @@ const ProfileState = (props) => {
     }
     
   };
+  const [mode, setMode] = useState("light");
+  const enableDarkMode = (e) =>{
+    if (e.target.checked) {
+      document.body.style.backgroundColor = "#494F55";
+      document.body.style.color = "#F5F5F5"; // Optional for better contrast
+      setMode("dark");
+    } else {
+      document.body.style.backgroundColor = "#F5F5F5";
+      document.body.style.color = "#494F55"; // Reset text color
+      setMode("light");
+    }
+  }
 
   return (
     <ProfileContext.Provider
@@ -101,7 +113,9 @@ const ProfileState = (props) => {
         transactions,
         getTransactions,
         emp,
-        getEmp
+        getEmp,
+        enableDarkMode,
+        mode,
       }}
     >
       {props.children}

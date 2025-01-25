@@ -5,7 +5,7 @@ import profileContext from "../context/Profile/ProfileContext";
 const Verifyotp = () => {
     const navigate = useNavigate();
     const [otp, setOtp] = useState("");
-    const { alert, showAlert } = useContext(profileContext);
+    const { alert, showAlert, mode } = useContext(profileContext);
 
     const handleChange = (e) => {
         setOtp(e.target.value);
@@ -63,7 +63,9 @@ const Verifyotp = () => {
           </div>
         )}
       </div>
-      <div className="card p-4" style={{ width: "100%", maxWidth: "400px" }}>
+      <div className={`card p-4 ${
+              mode === "dark" ? "bg-dark text-white" : "bg-light text-dark"
+            }`} style={{ width: "100%", maxWidth: "400px" }}>
         <form onSubmit={verifyOtp}>
           <h2 className="text-center mb-4">Verify OTP</h2>
           <h5 className="mb-4">An OTP has been sent to your email which is valid for next five minutes.</h5>

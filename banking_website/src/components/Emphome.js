@@ -4,7 +4,7 @@ import profileContext from '../context/Profile/ProfileContext';
 import Currencyconverter from './Currencyconverter';
 
 const Emphome = () => {
-  const { alert, showAlert, emp, getEmp } = useContext(profileContext);
+  const { alert, showAlert, emp, getEmp, mode } = useContext(profileContext);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -48,7 +48,9 @@ const Emphome = () => {
           className="col-sm-12 col-md-6 col-lg-4 mb-4"
           style={{ marginTop: "70px" }}
         >
-          <div className="card mb-4">
+          <div className={`card mb-4 ${
+              mode === "dark" ? "bg-dark text-white" : "bg-light text-dark"
+            }`}>
             <div className="card-body">
               <h3 className="card-title">{emp?.name}</h3>
               <h6 className="card-subtitle mb-2 text-muted">{emp?.name}</h6>

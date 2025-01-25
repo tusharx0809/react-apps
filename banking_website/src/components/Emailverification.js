@@ -7,7 +7,7 @@ const Emailverification = () => {
   const handleChange = (e) => {
     setOtp(e.target.value);
   };
-  const { alert, showAlert } = useContext(profileContext);
+  const { alert, showAlert, mode } = useContext(profileContext);
   const navigate = useNavigate();
   const verifyOTP = async (e) => {
     e.preventDefault();
@@ -67,7 +67,9 @@ const Emailverification = () => {
             </div>
           )}
         </div>
-        <div className="card p-4" style={{ width: "100%", maxWidth: "400px" }}>
+        <div className={`card mb-4 ${
+              mode === "dark" ? "bg-dark text-white" : "bg-light text-dark"
+            }`} style={{ width: "100%", maxWidth: "400px" }}>
           <form onSubmit={verifyOTP}>
             <h2 className="text-center mb-4">Verify OTP</h2>
             <h5 className="mb-4">Enter OTP</h5>

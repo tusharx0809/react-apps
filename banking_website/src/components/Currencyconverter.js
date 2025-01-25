@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import profileContext from "../context/Profile/ProfileContext";
 
 const Currencyconverter = () => {
-  const { showAlert } = useContext(profileContext);
+  const { showAlert, mode } = useContext(profileContext);
 
   const currencies = {
     AED: "United Arab Emirates",
@@ -259,7 +259,9 @@ const Currencyconverter = () => {
 
   return (
     <div style={{ marginTop: "25px" }}>
-      <div className="card">
+      <div className={`card mb-4 ${
+              mode === "dark" ? "bg-dark text-white" : "bg-light text-dark"
+            }`}>
         <div className="card-body">
           <div className="row justify-content-around">
             <div className="col-6">

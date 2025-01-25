@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import profileContext from "../context/Profile/ProfileContext";
 
 const Navbar = () => {
-  const { user, logoutUser, emp } = useContext(profileContext);
+  const { user, logoutUser, emp, enableDarkMode, mode } = useContext(profileContext);
   const navigate = useNavigate();
 
   const logout = () => {
@@ -12,17 +12,32 @@ const Navbar = () => {
     window.location.reload(true);
   };
 
+  
+
   return (
     <div>
       <nav
-        className="navbar navbar-expand-lg bg-body-tertiary"
+        className={`navbar navbar-expand-lg ${
+          mode === "dark" ? "bg-dark navbar-dark" : "bg-secondary navbar-light"
+        }`}
         data-bs-theme="dark"
       >
         <div className="container-fluid">
           <Link className="navbar-brand text-decoration-none" to="/">
             Banking
           </Link>
-          
+          <div class="form-check form-switch" style={{marginTop: "5px"}}>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="flexSwitchCheckDefault"
+                    onChange={enableDarkMode}
+                  />
+                  <label className={`form-check-label ${mode === "light" ? "text-white" : ""}`} for="flexSwitchCheckDefault">
+                    {mode === "dark" ? "Dark Mode" : "Light Mode"}
+                  </label>
+                </div>
           <button
             className="navbar-toggler"
             type="button"
@@ -80,7 +95,7 @@ const Navbar = () => {
                 <Link to="/emplogin">
                   <button
                     type="button"
-                    className="btn btn-outline-secondary mx-3"
+                    className="btn btn-outline-light mx-3"
                   >
                     Employee Login
                   </button>

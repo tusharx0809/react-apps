@@ -4,7 +4,7 @@ import html2pdf from "html2pdf.js";
 
 
 const Transactions = () => {
-  const { transactions, getTransactions } = useContext(profileContext);
+  const { transactions, getTransactions, mode } = useContext(profileContext);
 
   useEffect(() => {
     getTransactions();
@@ -22,7 +22,9 @@ const Transactions = () => {
   return (
     
       <div>
-        <div className="card" style={{ height: "351px", overflowY: "scroll" }}>
+        <div className={`card mb-4 ${
+              mode === "dark" ? "bg-dark text-white" : "bg-light text-dark"
+            }`} style={{ height: "351px", overflowY: "scroll" }}>
           <div className="card-body">
             <div className="d-flex justify-content-around">
               <div className="col-12">
@@ -37,7 +39,8 @@ const Transactions = () => {
                   </button>
                 </div>
                 <div className="table-responsive">
-                  <table id="table-to-pdf" className="table w-100">
+                  <table id="table-to-pdf" className={`table w-100 ${mode === "dark" ? "table-dark" : ""}`}
+                  >
                     <thead>
                       <tr>
                         <th scope="col">S.No</th>

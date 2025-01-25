@@ -3,7 +3,7 @@ import profileContext from '../context/Profile/ProfileContext';
 import { useNavigate } from 'react-router-dom';
 
 const Emplogin = () => {
-  const { alert, showAlert } = useContext(profileContext);
+  const { alert, showAlert, mode } = useContext(profileContext);
   const navigate = useNavigate();
   const [empDetails, setEmpDetails] = useState({
     empid:"",
@@ -65,7 +65,9 @@ const Emplogin = () => {
           </div>
         )}
       </div>
-        <div className="card p-4" style={{ width: "100%", maxWidth: "400px" }}>
+        <div className={`card p-4 ${
+              mode === "dark" ? "bg-dark text-white" : "bg-light text-dark"
+            }`} style={{ width: "100%", maxWidth: "400px" }}>
       <form onSubmit={emplogin}> 
       <h2 className="text-center mb-4">Employee Login</h2>
         <div className="mb-3">

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import profileContext from "../context/Profile/ProfileContext";
 
 const Login = () => {
-  const { alert, showAlert } = useContext(profileContext);
+  const { alert, showAlert, mode } = useContext(profileContext);
   const [credentials, setCredentials] = useState({
     email:"",
     password:""
@@ -66,7 +66,9 @@ const Login = () => {
           </div>
         )}
       </div>
-        <div className="card p-4" style={{ width: "100%", maxWidth: "400px" }}>
+        <div className={`card p-4 ${
+              mode === "dark" ? "bg-dark text-white" : "bg-light text-dark"
+            }`} style={{ width: "100%", maxWidth: "400px" }}>
       <form onSubmit={login}> 
       <h2 className="text-center mb-4">Login</h2>
         <div className="mb-3">

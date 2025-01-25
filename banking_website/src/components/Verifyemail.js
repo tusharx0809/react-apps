@@ -7,7 +7,7 @@ const Verifyemail = () => {
     const handleChange = (e) => {
         setEmail(e.target.value);
     }
-    const { alert, showAlert } = useContext(profileContext);
+    const { alert, showAlert, mode } = useContext(profileContext);
     const navigate = useNavigate();
     const verifyEmail = async (e) => {
         e.preventDefault();
@@ -62,7 +62,9 @@ const Verifyemail = () => {
           </div>
         )}
       </div>
-      <div className="card p-4" style={{ width: "100%", maxWidth: "400px" }}>
+      <div className={`card p-4 ${
+              mode === "dark" ? "bg-dark text-white" : "bg-light text-dark"
+            }`} style={{ width: "100%", maxWidth: "400px" }}>
         <form onSubmit={verifyEmail}>
           <h2 className="text-center mb-4">Verify Email</h2>
           <h5 className="mb-4">Enter your registered email</h5>

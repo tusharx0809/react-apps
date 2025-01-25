@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const Empverification = () => {
   const [otp, setOtp] = useState("");
-  const { alert, showAlert } = useContext(profileContext);
+  const { alert, showAlert, mode } = useContext(profileContext);
   const navigate = useNavigate();
   const handleChange = (e) => {
     setOtp(e.target.value);
@@ -61,7 +61,9 @@ const Empverification = () => {
           </div>
         )}
       </div>
-      <div className="card p-4" style={{ width: "100%", maxWidth: "400px" }}>
+      <div className={`card p-4 ${
+              mode === "dark" ? "bg-dark text-white" : "bg-light text-dark"
+            }`} style={{ width: "100%", maxWidth: "400px" }}>
         <form onSubmit={verifyEmpOtp}>
           <h2 className="text-center mb-4">Verify OTP</h2>
           <h5 className="mb-4">

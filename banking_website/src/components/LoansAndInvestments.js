@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const LoansAndInvestments = () => {
   const navigate = useNavigate();
-  const { alert, showAlert, user, getUserProfile } = useContext(profileContext);
+  const { alert, showAlert, user, getUserProfile, mode } = useContext(profileContext);
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/login");
@@ -44,7 +44,9 @@ const LoansAndInvestments = () => {
       {/* Cards Section */}
       <div className="row" style={{ marginTop: "70px" }}>
         <div className="col-md-6">
-          <div className="card" style={{ height: "351px" }}>
+          <div className={`card mb-4 ${
+              mode === "dark" ? "bg-dark text-white" : "bg-light text-dark"
+            }`} style={{ height: "351px" }}>
             <div className="card-body">
               <div className="d-flex justify-content-around">
                 <div className="col-12">
@@ -57,7 +59,9 @@ const LoansAndInvestments = () => {
           </div>
         </div>
         <div className="col-md-6">
-          <div className="card" style={{ height: "351px" }}>
+          <div className={`card mb-4 ${
+              mode === "dark" ? "bg-dark text-white" : "bg-light text-dark"
+            }`} style={{ height: "351px" }}>
             <div className="card-body">
               <div className="d-flex justify-content-around">
                 <div className="col-12">

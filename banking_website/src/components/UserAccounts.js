@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import profileContext from "../context/Profile/ProfileContext";
 const UserAccounts = () => {
-    const { showAlert, accInfo, getAccInfo, getTransactions } =
+    const { showAlert, accInfo, getAccInfo, getTransactions, mode } =
     useContext(profileContext);
     const [IsTransferModal, setIsTransferModalOpen] = useState(false);
       const [accounts, setAccounts] = useState({
@@ -109,7 +109,9 @@ const UserAccounts = () => {
   return (
     <div>
       <div>
-          <div className="card">
+          <div className={`card mb-4 ${
+              mode === "dark" ? "bg-dark text-white" : "bg-light text-dark"
+            }`}>
             <div className="card-body">
               <div className="row justify-content-around">
                 <div className="col-6">
@@ -117,10 +119,12 @@ const UserAccounts = () => {
                     className="accordion accordion-flush"
                     id="accordionFlushExample"
                   >
-                    <div className="accordion-item">
+                    <div className={`accordion-item ${mode === "dark" ? "bg-dark text-white" : ""}`}>
                       <h2 className="accordion-header">
                         <button
-                          className="accordion-button collapsed"
+                          className={`accordion-button collapsed ${
+                            mode === "dark" ? "bg-dark text-white" : ""
+                          }`}
                           type="button"
                           data-bs-toggle="collapse"
                           data-bs-target="#flush-collapseOne"
@@ -132,7 +136,9 @@ const UserAccounts = () => {
                       </h2>
                       <div
                         id="flush-collapseOne"
-                        className="accordion-collapse collapse"
+                        className={`accordion-collapse collapse ${
+                          mode === "dark" ? "bg-dark text-white" : ""
+                        }`}
                         data-bs-parent="#accordionFlushExample"
                       >
                         <div className="accordion-body">
@@ -141,10 +147,12 @@ const UserAccounts = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="accordion-item">
+                    <div className={`accordion-item ${mode === "dark" ? "bg-dark text-white" : ""}`}>
                       <h2 className="accordion-header">
                         <button
-                          className="accordion-button collapsed"
+                          className={`accordion-button collapsed ${
+                            mode === "dark" ? "bg-dark text-white" : ""
+                          }`}
                           type="button"
                           data-bs-toggle="collapse"
                           data-bs-target="#flush-collapseTwo"
@@ -156,7 +164,9 @@ const UserAccounts = () => {
                       </h2>
                       <div
                         id="flush-collapseTwo"
-                        className="accordion-collapse collapse"
+                        className={`accordion-collapse collapse ${
+                          mode === "dark" ? "bg-dark text-white" : ""
+                        }`}
                         data-bs-parent="#accordionFlushExample"
                       >
                         <div className="accordion-body">
