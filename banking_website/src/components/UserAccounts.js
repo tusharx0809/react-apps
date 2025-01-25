@@ -65,6 +65,7 @@ const UserAccounts = () => {
           if (json.success) {
             setIsTransferModalOpen(false);
             getAccInfo();
+            getTransactions();
             showAlert(json.message, "success");
           } else {
             showAlert(json.error, "danger");
