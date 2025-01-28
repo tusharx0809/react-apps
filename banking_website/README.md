@@ -8,7 +8,7 @@
     <li>Transfer between Savings and Checquings Account.</li>
     <li>Send money to users using email id.</li>
     <li>Renew password which required current password</li>
-    <li> Currency Converter accoording to latest currencies. Special Thanks to @fawazahmed0 for currency converter api.<li>
+    <li> Currency Converter accoording to latest currencies. Special Thanks to @fawazahmed0 for currency converter api.</li>
     <li>Toggle Dark/Light Mode</li>
 </ul>
 
